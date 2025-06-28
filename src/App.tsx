@@ -77,7 +77,7 @@ function App() {
   
   //   fetchUser();
   // }, []);
-
+  console.log("test");
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
