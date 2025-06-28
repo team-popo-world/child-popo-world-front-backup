@@ -1,10 +1,11 @@
 import { InventoryTemplate } from "@/module/market/template/inventory";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { playButtonSound } from "@/lib/utils/sound";
+import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getInventory, type InventoryItem } from "@/lib/api/market/getInventory";
 import { useProduct } from "@/lib/api/market/useProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import InventoryTTS from "@/assets/sound/tutorial/inventory_tts_“여긴 너만의 창고야. 모아둔 걸 꺼내서 쓸 수 있어~!”_2025-06-28 (1).wav"
 
 export const TEXT_MESSAGE = {
   not_product: {
@@ -35,6 +36,10 @@ export default function Inventory() {
   const [productIndex, setProductIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<InventoryItem | null>(null);
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    playSound(InventoryTTS, 1);
+  }, []);
 
   // 인벤토리 아이템 조회
   const { data: storeItems } = useQuery({

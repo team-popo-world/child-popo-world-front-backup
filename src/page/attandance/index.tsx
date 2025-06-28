@@ -45,7 +45,7 @@ export default function AttandancePage() {
 
   useEffect(() => {
     if (!isTutorialCompleted) {
-      playSound(tutorialAttandance["attendance2"].sound);
+      playSound(tutorialAttandance["attendance2"].sound, 1, true);
     }
   }, [isTutorialCompleted]);
 

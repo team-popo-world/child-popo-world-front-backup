@@ -180,7 +180,17 @@ export default function InvestingGame() {
 
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
-    setNewAudio(INITIAL_CHAPTER_DATA[gametype].sound, 1);
+    let volume = 0.5;
+    if(INITIAL_CHAPTER_DATA[gametype].sound == "little-pig") {  
+      volume = 0.6;
+    } else if(INITIAL_CHAPTER_DATA[gametype].sound == "truck") {
+      volume = 0.7;
+    } else if(INITIAL_CHAPTER_DATA[gametype].sound == "masic") {
+      volume = 1;
+    } else if(INITIAL_CHAPTER_DATA[gametype].sound == "ninja") {
+      volume = 0.8;
+    }
+    setNewAudio(INITIAL_CHAPTER_DATA[gametype].sound, volume);
   }, []);
 
   // 음소거 상태 변경시 배경음악 정지 또는 재생

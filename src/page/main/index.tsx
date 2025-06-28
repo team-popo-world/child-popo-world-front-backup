@@ -32,7 +32,7 @@ export default function Main() {
   
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
-    setNewAudio(MainBackgroundMusic, 0.4);
+    setNewAudio(MainBackgroundMusic, 0.38);
   }, []);
 
   // 음소거 상태 변경시 배경음악 정지 또는 재생
@@ -132,7 +132,12 @@ export default function Main() {
     if (targetPath === "/market") {
       return navigate("/market", { state: { from: "main" } });
     }
-
+    if (targetPath === "/emotionDiary") {
+      return navigate("/emotionDiary", { state: { from: "main" } });
+    }
+    if (targetPath === "/quest") {
+      return navigate("/quest", { state: { from: "main" } });
+    }
     if (targetPath) {
       return navigate(targetPath);
     }

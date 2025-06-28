@@ -1,11 +1,12 @@
 import { ParentShopTemplate } from "@/module/market/template/parent-shop";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../lib/zustand/authStore";
-import { playButtonSound } from "@/lib/utils/sound";
+import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getStoreItems, type StoreItem } from "@/lib/api/market/getStore";
 import { buyProduct } from "@/lib/api/market/buyProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import ParentShopTTS from "@/assets/sound/tutorial/parent_shop_tts_“엄마가 준비한 선물 보러 왔구나!  맘에 드는 거 골라봐~”_2025-06-27.wav"
 
 export const TEXT_MESSAGE = {
   not_product: {
@@ -45,6 +46,10 @@ export default function NpcShop() {
     queryFn: () => getStoreItems("parent"),
     staleTime: 0 // 0초 그냥 부모가 상품올렸을떄 바로 반영해야함
   });
+
+  useEffect(() => {
+    playSound(ParentShopTTS , 1);
+  }, []);
 
   const purchaseMutation = useMutation({
     mutationFn: (productId: string) => buyProduct({ productId, amount: 1}),

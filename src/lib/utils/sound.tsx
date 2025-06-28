@@ -14,7 +14,10 @@ export const playButtonSound = (url: string = buttonSound, volume: number = 1) =
 
 // 전역 효과음 Audio 객체
 let effectAudio: HTMLAudioElement | null = null;
-export const playSound = (url: string, volume: number = 1, onEnded?: () => void) => {
+export const playSound = (url: string, volume: number = 1,  tutorial: boolean = false) => {
+  const { isMuted } = useSoundStore.getState();
+  if(!tutorial && isMuted) return;
+
   if (effectAudio) {
     effectAudio.pause();
     effectAudio.currentTime = 0;
@@ -28,10 +31,6 @@ export const playSound = (url: string, volume: number = 1, onEnded?: () => void)
   effectAudio.src = url;
   effectAudio.volume = volume;
   
-  // 음원 재생 완료 시 콜백 실행
-  if (onEnded) {
-    effectAudio.onended = onEnded;
-  }
   
   effectAudio.play();
 };

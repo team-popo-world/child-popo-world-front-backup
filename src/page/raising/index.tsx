@@ -3,7 +3,7 @@ import { IMAGE_URLS } from "../../lib/constants/constants";
 import { BackArrow } from "../../components/button/BackArrow";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setNewAudio, stopBackgroundMusic, playButtonSound } from "@/lib/utils/sound";
+import { setNewAudio, stopBackgroundMusic, playButtonSound, playSound } from "@/lib/utils/sound";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import RaisingBackgroundMusic from "@/assets/sound/raising.mp3";
 import SoundButton from "@/components/button/SoundButton";
@@ -12,7 +12,7 @@ import { getFeeds, feedPopo } from "@/lib/api/raising/raising";
 import type { Feed } from "@/lib/api/raising/raising";
 import { ToRasingLandLoading1 } from "@/components/loading/ToRasingLandLoading1";
 import { ToRasingLandLoading2 } from "@/components/loading/ToRasingLandLoading2";
-
+import RaisingTTS from "@/assets/sound/tutorial/rasing_tts“배고픈 포포 기다리는 중~ 냠냠~ 먹이 주러 가자”_2025-06-28.wav"
 // 먹이 이미지 매핑
 const feedImageMap: Record<string, keyof typeof IMAGE_URLS.raising> = {
   "당근": "carrot",
@@ -88,6 +88,7 @@ export default function RaisingPage() {
 
   useEffect(() => {
     setNewAudio(RaisingBackgroundMusic);
+    playSound(RaisingTTS, 1);
   }, []);
   // 음소거 상태 변경시 배경음악 정지 또는 재생
   useEffect(() => {
