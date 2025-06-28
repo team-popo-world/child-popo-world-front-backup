@@ -1,7 +1,7 @@
 import { BackArrow } from "@/components/button/BackArrow";
 import { Background } from "@/components/layout/Background";
 import { IMAGE_URLS } from "@/lib/constants/constants";
-import { InventorySpeechBubble, SpeechBubble as _SpeechBubble} from "../components/SpeechBubble";
+import { InventorySpeechBubble } from "../components/SpeechBubble";
 import { InventoryDarkWoodTitle } from "../components/WoodTitle";
 import { Modal } from "@/components/modal/Modal";
 import { InventoryModal } from "../components/InventoryModal";
@@ -9,7 +9,7 @@ import NameAndPoint from "@/components/user/NameAndPoint";
 import type { InventoryItem } from "@/lib/api/market/getInventory";
 import { TextWithStroke } from "@/components/text/TextWithStroke";
 import SoundButton from "@/components/button/SoundButton";
-import { playButtonSound } from "@/lib/utils/sound";
+
 interface InventoryTemplateProps {
   isUseModalOpen: boolean;
   setIsUseModalOpen: (isOpen: boolean) => void;

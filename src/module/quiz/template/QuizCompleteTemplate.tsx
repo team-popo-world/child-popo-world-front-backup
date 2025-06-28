@@ -1,6 +1,6 @@
 import { Background } from "@/components/layout/Background";
 import { IMAGE_URLS } from "@/lib/constants/constants";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Lottie from "react-lottie";
 import animationData from '@/components/lottie/Confetti.json';
 

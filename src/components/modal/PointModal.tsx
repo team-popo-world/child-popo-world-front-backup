@@ -3,8 +3,8 @@ import { Modal } from "@/components/modal/Modal";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie";
 import animationData from '@/components/lottie/Confetti.json';
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+  
 interface PointModalProps {
   title: string;
   text: string;

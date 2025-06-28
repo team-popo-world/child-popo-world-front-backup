@@ -155,7 +155,6 @@ export default function InvestingGame() {
   // 소리 
   const { isMuted, audio } = useSoundStore();
   // 포인트
-  const queryClient = useQueryClient();
   // 게임 데이터를 저장할 state
   const [gameData, setGameData] = useState<any>(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);

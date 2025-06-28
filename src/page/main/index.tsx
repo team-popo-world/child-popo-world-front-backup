@@ -10,7 +10,6 @@ import { preload } from "react-dom";
 import MainBackgroundMusic from "@/assets/sound/main1.mp3";
 import { getDiary } from "@/lib/api/emotion/getDiary";
 import { useQueryClient } from '@tanstack/react-query';
-import { getQuest } from "@/lib/api/quest/getQuest";
 import Tutorial from "@/module/main/template/Tutorial";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 
@@ -153,10 +152,8 @@ export default function Main() {
       isAnimating={isAnimating}
       targetPosition={targetPosition}
       direction={direction}
-      isMuted={isMuted}
       handleIslandClick={handleIslandClick}
       handleAnimationComplete={handleAnimationComplete}
-      toggleMute={toggleMute}
       logout={logout}
     />
   );

@@ -11,7 +11,6 @@ import NameAndPoint from "@/components/user/NameAndPoint";
 import type { StoreItem } from "@/lib/api/market/getStore";
 import { CompleteModal } from "../components/CompleteModal";
 import SoundButton from "@/components/button/SoundButton";
-import { playButtonSound } from "@/lib/utils/sound";  
 import { NoPointModal } from "@/components/modal/NoPointModal";
 interface ParentShopTemplateProps {
   isPurchaseModalOpen: boolean;

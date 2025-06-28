@@ -2,7 +2,6 @@ import { IMAGE_URLS } from "@/lib/constants/constants";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { Background } from "../layout/Background";
-import { useState } from "react";
 import { playButtonSound } from "@/lib/utils/sound";
 
 export const ToRasingLandLoading2 = ({ onAnimationComplete }: { onAnimationComplete: () => void }) => {

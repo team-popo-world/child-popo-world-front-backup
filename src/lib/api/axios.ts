@@ -61,7 +61,7 @@ apiClient.interceptors.request.use(
 
     return config;
   },
-  (error) => {
+  ( ) => {
     // 요청 설정 중 에러 발생 시 처리
     return Promise.reject(new ApiError(0, "요청 설정 중 오류가 발생했습니다."));
   }
@@ -133,7 +133,7 @@ apiClient.interceptors.response.use(
         );
 
         // 204 응답의 경우 헤더에서 토큰을 가져오거나 다른 방식으로 처리
-        let accessToken = response.headers["authorization"]?.replace("Bearer ", "");
+        const accessToken = response.headers["authorization"]?.replace("Bearer ", "");
         const newRefreshToken = response.headers["refresh-token"];
 
         // accessToken이 여전히 없으면 에러 처리
@@ -157,7 +157,7 @@ apiClient.interceptors.response.use(
           error.config.headers.Authorization = `Bearer ${accessToken}`;
           return apiClient(error.config);
         }
-      } catch (refreshError) {
+      } catch (error: unknown) {
         // refresh 토큰도 만료된 경우
         retryCountMap.delete(requestKey);
         Cookies.remove("refreshToken");

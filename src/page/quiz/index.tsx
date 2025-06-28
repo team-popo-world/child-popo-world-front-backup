@@ -55,7 +55,7 @@ export default function QuizPage() {
       await apiClient.get("/api/quiz/active");
       // 성공 -> 아직 퀴즈 안함
       navigate("/quiz/level-select");
-    } catch (error: any) {
+    } catch (error: unknown) {
         setIsModalOpen(true);
     }
   };

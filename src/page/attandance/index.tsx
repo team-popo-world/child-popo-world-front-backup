@@ -3,7 +3,7 @@ import { getAttendance, postAttendance } from "@/lib/api/attandance/attendance";
 import { useAuthStore } from "@/lib/zustand/authStore";
 import { AttandanceTemplate } from "@/module/attandance/template";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { playButtonSound, playSound, setNewAudio } from "@/lib/utils/sound";
+import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getToday, getYesterday } from "@/lib/utils/utils";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { useNavigate } from "react-router-dom";

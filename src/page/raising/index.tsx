@@ -10,7 +10,6 @@ import SoundButton from "@/components/button/SoundButton";
 import backClickSound from "@/assets/sound/back_click.mp3";
 import { getFeeds, feedPopo } from "@/lib/api/raising/raising";
 import type { Feed } from "@/lib/api/raising/raising";
-import { ToRasingLandLoading1 } from "@/components/loading/ToRasingLandLoading1";
 import { ToRasingLandLoading2 } from "@/components/loading/ToRasingLandLoading2";
 import RaisingTTS from "@/assets/sound/tutorial/rasing_tts“배고픈 포포 기다리는 중~ 냠냠~ 먹이 주러 가자”_2025-06-28.wav"
 // 먹이 이미지 매핑

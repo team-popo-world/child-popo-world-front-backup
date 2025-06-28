@@ -108,7 +108,7 @@ export const GameEnd = ({
       // y(d)는 scaleLinear()로 변환된 결과이므로 실제 픽셀 좌표 MoveTo (M) 명령어, Horizontal Line To (H) 명령어
       .attr("d", (d) => `M0,${y(d)}H${width}`) // attr()로는 주로 SVG 속성들을 설정
       .attr("stroke", "#7b5025") // --color-main-brown-575
-      .attr("stroke-dasharray", (_d, i) => {
+      .attr("stroke-dasharray", (_, i) => {
         return i !== 0 ? "5,5" : "0,0";
       }) // 5px 선, 5px 공백
       .attr("stroke-width", 1);
@@ -142,7 +142,7 @@ export const GameEnd = ({
       .append("g") // g그룹에 추가
       .attr("class", "tick") // tick 클래스 추가
       .attr("transform", (d) => `translate(${x(d)},0)`) // 좌표 이동
-      .each(function (_d) {
+      .each(function () {
         const roughLine = rc.line(0, 0, 0, 6, {
           roughness: 1,
           stroke: "#7b5025", // --color-main-brown-575
@@ -384,7 +384,7 @@ export const GameEnd = ({
     // 간격을 위해서 변수 지정 2025.06.24 추가
     let offsetX = 0;
 
-    legendItems.forEach((item, i) => {
+    legendItems.forEach((item) => {
       const legendItem = legend
         .append("g")
         .attr("transform", `translate(${offsetX}, 0)`);

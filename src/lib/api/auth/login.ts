@@ -1,8 +1,7 @@
 import apiClient from "../axios";
 import Cookies from "js-cookie";
-import { useAuthStore } from "@/lib/zustand/authStore";
 
-// 로그인 요청 타입
+// 로그인 요청 타입 
 export interface LoginRequest {
   email: string;
   password: string;

@@ -8,7 +8,7 @@ interface NewsBoxProps {
   newsImage?: string;
 } 
 
-export const NewsBox = memo(({ title, hint: _hint, 
+export const NewsBox = memo(({ title, 
   sirenImage = IMAGE_URLS.investing_game.base.siren_popo, 
   newsImage = IMAGE_URLS.investing_game.base.news_popo }: NewsBoxProps) => {
   return (

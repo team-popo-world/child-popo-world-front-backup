@@ -6,7 +6,6 @@
  */
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import apiClient from "../api/axios";
 import Cookies from "js-cookie";
 
 /**

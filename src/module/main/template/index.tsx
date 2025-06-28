@@ -22,20 +22,16 @@ interface MainTemplateProps {
   isAnimating: boolean;
   targetPosition: { top: string; left: string };
   direction: "left" | "right";
-  isMuted: boolean;
   handleIslandClick: (island: keyof typeof ISLAND_POSITIONS, path: string, direction?: "left" | "right") => void;
   handleAnimationComplete: () => void;
-  toggleMute: () => void;
   logout: () => void;
 }
 export default function MainTemplate({
   isAnimating,
   targetPosition,
   direction,
-  isMuted,
   handleIslandClick,
   handleAnimationComplete,
-  toggleMute,
   logout,
 }: MainTemplateProps) {
   return (

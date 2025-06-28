@@ -71,13 +71,9 @@ export const depositToSavings = async ({
   depositPoint,
   success,
 }: DepositRequest): Promise<DepositResponse> => {
-  try {
     const response = await apiClient.put("/api/saveAccount/dailyDeposit", {
       depositPoint,
       success,
     });
     return response.data;
-  } catch (error: any) {
-    throw error;
-  }
 }; 

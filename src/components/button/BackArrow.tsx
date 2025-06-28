@@ -11,6 +11,13 @@ interface BackArrowProps {
 }
 
 export const BackArrow = ({ onClick, className, color = "gray" }: BackArrowProps) => {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(-1);
+    }
+  };
   const navigate = useNavigate();
   const getBackArrowImage = () => {
     if (color === "black") return IMAGE_URLS.common.back_arrow_black;
@@ -30,7 +37,7 @@ export const BackArrow = ({ onClick, className, color = "gray" }: BackArrowProps
       )}
       onClick={() => {
         playButtonSound(backSound, 0.3);
-        onClick ? onClick() : navigate(-1);
+        handleClick();
       }}
     />
   );

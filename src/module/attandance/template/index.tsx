@@ -1,11 +1,10 @@
 import { BackArrow } from "@/components/button/BackArrow";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import { PointModal } from "@/components/modal/PointModal";
-import { playButtonSound, setNewAudio } from "@/lib/utils/sound";
+import { playButtonSound } from "@/lib/utils/sound";
 import { Modal } from "@/components/modal/Modal";
 import SoundButton from "@/components/button/SoundButton";
 import { WEEK, cheeringText, rewardText, type Attendance } from "@/page/attandance";
-import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import clsx from "clsx";
 import { SpeechBubble2 } from "@/components/text/SpeechBubble";
 import { tutorialAttandance } from "@/lib/constants/tutorial";

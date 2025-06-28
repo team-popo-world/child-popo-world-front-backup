@@ -1,5 +1,5 @@
 import { Background } from "../../../components/layout/Background";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,8 +21,8 @@ export default function RegisterPage() {
     age: "",
     parentCode: "",
   });
-  const [isValidAge, setIsValidAge] = useState(true);
-
+  const [ isValidAge, setIsValidAge] = useState(true);
+  console.log(isValidAge)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     setForm((prev) => ({

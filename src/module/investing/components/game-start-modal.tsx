@@ -15,34 +15,38 @@ interface GameStartModalProps {
   export const GameStartModal = ({ point, title, onConfirm, onCancel, newsImage=IMAGE_URLS.investing_game.base.news_popo, sirenImage = IMAGE_URLS.investing_game.base.siren_popo }: GameStartModalProps) => {
     const getGameName = (title: string) => {
       switch (title) {
-        case "아기돼지 삼형제":
+        case "아기돼지 삼형제": {
           return <TextWithStroke
           className="mx-1"
           text="아기돼지 삼형제"
           textClassName="text-main-yellow-150 text-[1rem]"
           strokeClassName="text-investing-orange-100 text-[1rem] text-stroke-width-[0.3rem] text-stroke-color-main-brown-800"
         />
-        case "푸드트럭 왕국":
+        }
+        case "푸드트럭 왕국": {
           return <TextWithStroke
           className="mx-1"
           text="푸드트럭 왕국"
           textClassName="text-main-yellow-150 text-[1rem]"
           strokeClassName="text-investing-yellow-100 text-[1rem] text-stroke-width-[0.3rem] text-stroke-color-main-brown-800"
-        />      
-        case "마법 왕국":
+        />
+        }      
+        case "마법 왕국": {
           return <TextWithStroke
           className="mx-1"
           text="마법 왕국"
           textClassName="text-main-yellow-150 text-[1rem]"
           strokeClassName="text-investing-purple-100 text-[1rem] text-stroke-width-[0.3rem] text-stroke-color-main-brown-800"
-        />        
-        case "달빛 도둑":
+        />
+        }        
+        case "달빛 도둑": {
           return <TextWithStroke
           className="mx-1"
           text="달빛 도둑"
           textClassName="text-main-yellow-150 text-[1rem]"
           strokeClassName="text-investing-blue-100 text-[1rem] text-stroke-width-[0.3rem] text-stroke-color-main-brown-800"
-        />    
+        />
+        }    
       }
     }
   return (

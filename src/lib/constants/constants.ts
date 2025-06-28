@@ -154,7 +154,7 @@ const IMAGE_URLS = {
     },
     ninja: {
       ninja_bg:
-        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1750318032/ninja_bg_uqcua9  ",
+        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1750318032/ninja_bg_uqcua9",
       ninja1:
         "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja1_wrrxcv",
       ninja2:

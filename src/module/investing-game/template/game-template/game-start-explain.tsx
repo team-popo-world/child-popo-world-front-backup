@@ -4,10 +4,7 @@ import { BorderModal } from "../../component/border-modal";
 import { playButtonSound } from "@/lib/utils/sound";
 import closeSound from "@/assets/sound/back_click.mp3";
 import CloseIcon from "@/components/icon/CloseIcon";
-import { useState } from "react";
-import { GameStartModal } from "../../../investing/components/game-start-modal";
-import { Modal } from "@/components/modal/Modal";
-import { IMAGE_URLS } from "@/lib/constants/constants";
+
 interface GameDescription {
   image: string;
   label: string;

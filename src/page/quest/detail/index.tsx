@@ -2,7 +2,6 @@ import { QuestDetailTemplate } from "@/module/quest/template/QuestDetailTemplate
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type { Quest } from "@/module/quest/types/quest";
-import apiClient from "@/lib/api/axios";
 import { StateChangeModal } from "@/module/quest/components/StateChangeModal";
 import { useAuthStore } from "@/lib/zustand/authStore";
 import { playButtonSound, } from "@/lib/utils/sound";

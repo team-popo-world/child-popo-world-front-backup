@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BackArrow } from "../../components/button/BackArrow";
-import { ko, pl } from "date-fns/locale";
-import { addDays, isAfter as _isAfter, isSameDay as _isSameDay } from "date-fns";
+import { ko,   } from "date-fns/locale";
+import { addDays,} from "date-fns";
 import { useAuthStore } from "@/lib/zustand/authStore";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import { playButtonSound, playSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
@@ -46,7 +46,7 @@ export default function SavingsPage() {
 
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
-    setNewAudio(SavingsBackgroundMusic, 1);
+    setNewAudio(SavingsBackgroundMusic);
     playSound(SavingsTTS, 1);
   }, []);
 
@@ -72,6 +72,7 @@ export default function SavingsPage() {
   const [goalAmount, setGoalAmount] = useState<string>(""); // 목표 저축 금액
   const [bonusAmount, setBonusAmount] = useState<string>(""); // 보너스 금액 상태 추가
   const [_createMessage, setCreateMessage] = useState("");
+  console.log(_createMessage)
   const [isLoading, setIsLoading] = useState(false);
 
   // 입력 모달 관련 상태
