@@ -1,20 +1,24 @@
 import { QuestTemplate } from "../../module/quest/template";
-import { useNavigate } from "react-router-dom";
-import { playButtonSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
+import { useLocation, useNavigate } from "react-router-dom";
+import { playButtonSound, playSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
 import { useEffect } from "react";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import QuestBackgroundMusic from "@/assets/sound/quest.mp3";
+import QuestTTS from "@/assets/sound/tutorial/quest_tts_“작은 약속~ 지켜볼까_ 오늘도 멋지게 도전!”_2025-06-27.wav"
 
 export default function QuestPage() {
   const navigate = useNavigate();
   const { isMuted, audio } = useSoundStore();
-
+  const { state } = useLocation();
+  const from = state?.from;
 
    // 첫페이지 로드시 배경음악 설정
    useEffect(() => {
-    console.log("audio.name", audio?.name);
     if(audio?.name !== QuestBackgroundMusic) {
-      setNewAudio(QuestBackgroundMusic, 0.6);
+      setNewAudio(QuestBackgroundMusic, 0.4);
+    }
+    if (from === "main") {
+      playSound(QuestTTS, 1);
     }
   }, []);
 

@@ -39,7 +39,7 @@ export default function QuizPage() {
 
   useEffect(() => {
     if(!isTutorialCompleted) {
-      playSound(tutorialQuiz["quiz2"].sound);
+      playSound(tutorialQuiz["quiz2"].sound, 1, true);
     }
   }, [isTutorialCompleted]);
 

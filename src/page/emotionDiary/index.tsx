@@ -1,19 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { EmotionDiaryTemplate } from "../../module/emotionDiary/template";
 import { useEffect, useState } from "react";
 import type { Diary } from "@/module/emotionDiary/types/diary";
-import { setNewAudio, stopBackgroundMusic, playButtonSound } from "@/lib/utils/sound";
+import { setNewAudio, stopBackgroundMusic, playButtonSound, playSound } from "@/lib/utils/sound";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import EmotionDiaryBackgroundMusic from "@/assets/sound/diary.mp3";
 import { getDiary } from "@/lib/api/emotion/getDiary";
 import { useQuery } from "@tanstack/react-query";
+import EmotionDiaryTTS from "@/assets/sound/tutorial/diary_tts_“포포는 네 마음이 궁금해! 같이 써보자~”_2025-06-27.wav"
 
 export default function EmotionDiaryPage() {
   const navigate = useNavigate();
   const [isWrittenToday, setIsWrittenToday] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-
+  const { state } = useLocation();
+  const from = state?.from; 
   const { isMuted, audio } = useSoundStore();
 
   const { data: diaryData, isLoading, isError } = useQuery<Diary[]>({
@@ -23,6 +25,9 @@ export default function EmotionDiaryPage() {
 
   useEffect(() => {
     setNewAudio(EmotionDiaryBackgroundMusic, 0.6);
+    if (from === "main") {
+      playSound(EmotionDiaryTTS, 1);
+    }
   }, []);
   
   // 음소거 상태 변경시 배경음악 정지 또는 재생

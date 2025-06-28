@@ -30,7 +30,7 @@ export default function Tutorial() {
 
   useEffect(() => {
     if (tutorialOrder[Object.keys(tutorialOrder)[currentStep - 1]].sound) {
-      playSound(tutorialOrder[Object.keys(tutorialOrder)[currentStep - 1]].sound);
+      playSound(tutorialOrder[Object.keys(tutorialOrder)[currentStep - 1]].sound, 1, true);
     } 
   }, [currentStep]);
 

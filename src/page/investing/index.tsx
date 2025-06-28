@@ -3,13 +3,14 @@ import { InvestingTemplate } from "../../module/investing/template";
 import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/zustand/authStore";
-import { playButtonSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
+import { playButtonSound, playSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
 import ClickSound from "@/assets/sound/button_click.mp3";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import InvestingBackgroundMusic from "@/assets/sound/invest.mp3";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import {getChapterData} from "@/lib/api/invest-game/getChapterData";
 import { useQueryClient } from '@tanstack/react-query';
+import InvestingTTS from "@/assets/sound/tutorial/invest_tts_“모의투자 섬 도착! 오늘은 어디에 투자해볼까_”_2025-06-27.wav"
 
 export const chaptersInfo = {
   "little-pig":{
@@ -54,7 +55,7 @@ export default function InvestingPage() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    setNewAudio(InvestingBackgroundMusic);
+    setNewAudio(InvestingBackgroundMusic, 0.53);
   }, []);
   // 음소거 상태 변경시 배경음악 정지 또는 재생
   useEffect(() => {
@@ -64,6 +65,7 @@ export default function InvestingPage() {
     if (audio && !isMuted) {
       audio.play();
     }
+    playSound(InvestingTTS, 1);
   }, [isMuted, audio]);
 
   const chapterPositions: Record<string, { x: number; y: number }> = {
