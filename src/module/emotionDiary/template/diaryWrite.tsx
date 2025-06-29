@@ -4,6 +4,7 @@ import { emotionList } from "../constants/emotionList";
 import SoundButton from "@/components/button/SoundButton";
 import { playButtonSound } from "@/lib/utils/sound";
 import { AlertModal } from "../components/AlretModal";
+import { IMAGE_URLS } from "@/lib/constants/constants";
 
 interface DiaryWriteTemplateProps {
   onBack: () => void;
@@ -24,7 +25,7 @@ export const DiaryWriteTemplate = ({
   onCloseAlertModal,
 }: DiaryWriteTemplateProps) => {
   return (
-    <Background backgroundImage="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1749622517/diary-write-bg_bld452.webp">
+    <Background backgroundImage={IMAGE_URLS.emotionDiary.write_bg}>
       <AlertModal isOpen={isAlertModalOpen} onClose={onCloseAlertModal} />
 
       {/* 뒤로가기 */}
@@ -108,7 +109,7 @@ export const DiaryWriteTemplate = ({
       {/* 포포 ~ */}
       <div aria-label="포포" className="absolute bottom-[5rem] right-[1rem]">
         <img
-          src="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1749625181/emotion-popo_wpurr1.webp"
+          src={IMAGE_URLS.emotionDiary.write_popo}
           alt="포포"
           className="w-[13rem]"
         />
@@ -119,7 +120,7 @@ export const DiaryWriteTemplate = ({
         className="absolute right-[1.5rem] top-[3rem] w-[10rem] "
       >
         <img
-          src="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1749625685/image-removebg-preview_22_1_sajx43.webp"
+          src={IMAGE_URLS.emotionDiary.write_bubble}
           alt="포포 말풍선"
           className="w-full"
         />

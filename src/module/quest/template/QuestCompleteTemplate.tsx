@@ -1,5 +1,6 @@
 import { Background } from "@/components/layout/Background";
 import { TextWithStroke } from "@/components/text/TextWithStroke";
+import { IMAGE_URLS } from "@/lib/constants/constants";
 
 interface QuestCompleteTemplate {
   onComplete: () => void;
@@ -8,7 +9,7 @@ export const QuestCompleteTemplate = ({
   onComplete,
 }: QuestCompleteTemplate) => {
   return (
-    <Background backgroundImage="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1749109575/iPad_Pro_12.9__-_34_p3cnin.webp">
+    <Background backgroundImage={IMAGE_URLS.quest.quest_complete_bg}>
       <TextWithStroke
         className="absolute left-[11rem] top-[5.5rem]"
         text="퀘스트 완료!"

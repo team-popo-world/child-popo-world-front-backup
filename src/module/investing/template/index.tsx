@@ -88,7 +88,7 @@ export const InvestingTemplate = ({
         >
           <div className="flex justify-center items-center mr-[0.5rem]">
             <img
-              src="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1748951657/common_coin_oii3sa.webp"
+              src={IMAGE_URLS.common.coin}
               alt="코인"
               className="h-[1.5rem]"
             />
