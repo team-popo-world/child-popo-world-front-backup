@@ -72,6 +72,8 @@ export const useAuthStore = create<AuthStore>()(
 
       login: (name: string, point: number, email: string) => {
         set({ isAuthenticated: true, name, point, email });
+        useTutorialStore.getState().setCurrentStep(1);
+        useTutorialStore.getState().setTutorialCompleted(false);
       },
 
       // 로그아웃 액션
@@ -79,8 +81,7 @@ export const useAuthStore = create<AuthStore>()(
         Cookies.remove("refreshToken");
         set(INITIAL_AUTH_STATE);
         // 튜토리얼 스토어 초기화
-        const tutorialStore = useTutorialStore.getState();
-        tutorialStore.setTutorialCompleted(false);
+        localStorage.removeItem('tutorial-storage');
       },
       // 액세스 토큰 설정
       setAccessToken: (accessToken) => set({ accessToken }),
