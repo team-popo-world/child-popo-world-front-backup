@@ -6,6 +6,8 @@ import { getInventory, type InventoryItem } from "@/lib/api/market/getInventory"
 import { useProduct } from "@/lib/api/market/useProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import InventoryTTS from "@/assets/sound/pageSound/inventory_tts.wav"
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
+import { useAuthStore } from "@/lib/zustand/authStore";
 
 export const TEXT_MESSAGE = {
   not_product: {
@@ -36,7 +38,7 @@ export default function Inventory() {
   const [productIndex, setProductIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<InventoryItem | null>(null);
   const queryClient = useQueryClient();
-
+  const { name: userName } = useAuthStore();
   useEffect(() => {
     playSound(InventoryTTS, 1);
   }, []);
@@ -51,9 +53,10 @@ export default function Inventory() {
     mutationFn: (productId: string) => useProduct({ productId }), 
     onSuccess: () => {
       setIsUseModalOpen(false);
-
       // 인벤토리 아이템 캐시 무효화, 리패치
       queryClient.invalidateQueries({ queryKey: ["inventory-items"], refetchType: "all" });
+      // 상품 구매시 메시지
+      postPushMessage(`${userName}님이 상품을 사용했어요!`);
     },
     onError: (error) => {
       console.error("Failed to use product", error);
@@ -61,7 +64,7 @@ export default function Inventory() {
   })
 
   // 마지막 페이지 인덱스 
-  const lastIndex = Math.ceil(storeItems?.length || 0 / 3) - 1;
+  const lastIndex = Math.ceil((storeItems?.length || 0) / 3) - 1;
 
   const getMessage = () => {
     if (storeItems?.length === 0) {

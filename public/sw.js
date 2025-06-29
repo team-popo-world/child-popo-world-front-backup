@@ -19,37 +19,32 @@ self.addEventListener('push', function (event) {
     // 푸시 메시지에 데이터가 포함되어 있는지 확인
     if (event.data) {
       try {
-      // 푸시 메시지 데이터를 JSON으로 파싱
-      const data = event.data.json()
-      
-      // 알림 표시 옵션 설정
-      const options = {
-        body: data.body,                    // 알림 본문 내용
-        icon: data.icon || '/icon.png',     // 알림 아이콘 (기본값: /icon.png)
-        // badge: '/badge.png',                // 알림 배지 아이콘, 이게 뭔지 몰라서 그냥 주석처리 해버리기
-        vibrate: [100, 50, 100],           // 진동 패턴 (밀리초 단위)
-        data: {
-          dateOfArrival: Date.now(),        // 알림 도착 시간
-          primaryKey: '2',                  // 알림 식별 키
-        },
-      }
-      
-      // 알림을 화면에 표시
-      // waitUntil은 비동기 작업이 완료될 때까지 서비스 워커를 활성 상태로 유지
-      event.waitUntil(self.registration.showNotification(data.title, options))
-      } catch (error) {
-        console.log('JSON 파싱 실패, 텍스트로 처리:', error);
         const text = event.data.text();
         const options = {
-          body: text,
-          icon: '/icon.png',
-          vibrate: [100, 50, 100],
+          body: text,                    // 알림 본문 내용
+          icon: '/icon.png',             // 알림 아이콘 (기본값: /icon.png)
+          vibrate: [100, 50, 100],        // 진동 패턴 (밀리초 단위)
           data: {
-            dateOfArrival: Date.now(),
-            primaryKey: '2',
+            dateOfArrival: Date.now(),    // 알림 도착 시간
+            primaryKey: '2',              // 알림 식별 키
           },
         };
-        event.waitUntil(self.registration.showNotification('알림', options));      }
+        // 알림 표시
+        event.waitUntil(self.registration.showNotification('알림', options));   
+        // 알림 표시후 메인 앱에 메시지 전송, 이게 클라이언트들 이라고 뜨는 이유는 모든 탭들이 클라이언트들이기 때문
+        event.waitUntil(
+          self.clients.matchAll().then(clients => {
+            clients.forEach(client => {
+              client.postMessage({
+                type: 'PUSH_NOTIFICATION_RECEIVED',
+                data: text
+              });
+            });
+          })
+        );
+      } catch (error) {
+        console.error('푸시 알림 처리 중 오류 발생:', error);
+      }
     }
   })
    

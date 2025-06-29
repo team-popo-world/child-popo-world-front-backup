@@ -16,6 +16,8 @@ import MasicSound from "@/assets/sound/chapter3.mp3";
 import NinjaSound from "@/assets/sound/chapter4.mp3";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
+import { useAuthStore } from "@/lib/zustand/authStore";
 
 // 게임 관련 타입 정의
 export interface Stock {
@@ -152,6 +154,7 @@ export default function InvestingGame() {
   const [sessionId, setSessionId] = useState("");
   const [startedAt, setStartAt] = useState("");
   const navigate = useNavigate();
+  const { name: userName } = useAuthStore();
   // 소리 
   const { isMuted, audio } = useSoundStore();
   // 포인트
@@ -175,6 +178,9 @@ export default function InvestingGame() {
 
   const useEndGameMutation = useMutation({
     mutationFn: ({ sessionId, chapterId, isSuccess, profitValue }: { sessionId: string, chapterId: string, isSuccess: boolean, profitValue: number }) => postEndGame(sessionId, chapterId, isSuccess, profitValue),
+    onSuccess: () => {
+      postPushMessage(`${userName}님이 투자 게임을 완료했어요!`);
+    }
   });
 
   // 첫페이지 로드시 배경음악 설정

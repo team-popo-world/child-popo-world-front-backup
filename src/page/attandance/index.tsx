@@ -8,6 +8,7 @@ import { getToday, getYesterday } from "@/lib/utils/utils";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { useNavigate } from "react-router-dom";
 import { tutorialAttandance } from "@/lib/constants/tutorial";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 export const WEEK = ["월", "화", "수", "목", "금", "토", "일"];
 
@@ -36,7 +37,7 @@ export default function AttandancePage() {
   const queryClient = useQueryClient();
   const { isTutorialCompleted  } = useTutorialStore();
   const navigate = useNavigate();
-
+  const { name: userName } = useAuthStore();
   const { data: attendanceData } = useQuery<Attendance[]>({
     queryKey: ["attendance"],
     queryFn: getAttendance,
@@ -57,7 +58,7 @@ export default function AttandancePage() {
       if(point !== null) setPoint(point + data.rewardPoints);
       setIsWeekCompleted(data.weekCompleted);
       setIsPointModalOpen(true);
-
+      postPushMessage(`${userName}님이 출석체크를 했어요!`);
       queryClient.invalidateQueries({ queryKey: ["attendance"], refetchType: "all" });
     },
     onError: () => {

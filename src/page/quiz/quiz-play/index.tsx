@@ -7,6 +7,7 @@ import apiClient from "@/lib/api/axios";
 import { useAuthStore } from "@/lib/zustand/authStore";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { playButtonSound } from "@/lib/utils/sound";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 interface Quiz {
   question: string;
@@ -27,9 +28,9 @@ export default function QuizPlayPage() {
   const [showCompletePage, setShowCompletePage] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [reward, setReward] = useState(0);
-  const { point, setPoint } = useAuthStore();
+  const { point, setPoint, name: userName } = useAuthStore();
   const navigate = useNavigate();
-  
+
   const handleBack = () => {
     if(!isTutorialCompleted) {
       navigate("/");
@@ -114,6 +115,7 @@ export default function QuizPlayPage() {
   const handleComplete = () => {
     playButtonSound();
     navigate("/quiz");
+    postPushMessage(`${userName}님이 퀴즈를 완료했어요!`);
     if(!isTutorialCompleted) {
       navigate("/");
     }

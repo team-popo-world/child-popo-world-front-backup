@@ -148,7 +148,7 @@ export const ParentShopTemplate = ({
           {storeItems.slice(productIndex * 3, (productIndex + 1) * 3).map((product) => (
             <div
               className="flex flex-col justify-center items-center gap-y-0.5 w-26 px-4 py-1.5 bg-[#F6D8B8] border-2 border-[#97784A] rounded-md min-h-[3.5rem] active:scale-95 transition-all duration-100"
-              key={product.name}
+              key={product.id}
               onClick={() => {
                 handleProductClick(product)
               }}
