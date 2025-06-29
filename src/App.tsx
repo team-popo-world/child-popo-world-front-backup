@@ -26,7 +26,7 @@ import PushNotificationProvider from "@/components/layout/PushNotificationProvid
 import LoginPage from "./page/auth/login";
 import RegisterPage from "./page/auth/register";
 import { BrowserRouter } from "react-router-dom";
-
+import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +38,7 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const { currentStep, setTutorialCompleted } = useTutorialStore();
   // 1. 핸드폰 기기에서 알림 권한 요청
   // 2. 서버에서 공개키 받음
   // 3. 공개키로 구독 정보 생성
@@ -48,7 +49,11 @@ function App() {
   // 8. 푸시 메시지 클릭 시 앱 실행
   // 9. 푸시 메시지 삭제
 
-
+  useEffect(() => {
+    if(currentStep != 1) {
+      setTutorialCompleted(true);
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
