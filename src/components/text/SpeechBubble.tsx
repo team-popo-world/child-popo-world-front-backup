@@ -11,7 +11,7 @@ export const SpeechBubble = ({ className = "", children}: SpeechBubbleProps) => 
     <div className={` ${className}`}>
       <div className="relative">
         {/* 말풍선 본체 */}
-        <div className="flex flex-col-reverse text-sm bg-white rounded-xl px-4 py-2 w-[15rem] ">
+        <div className="flex flex-col-reverse text-sm bg-white rounded-xl px-4 py-2 w-[13.5rem] ">
           {children}
         </div>
         {/* 화살표 */}

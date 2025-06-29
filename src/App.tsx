@@ -14,7 +14,7 @@ import Quiz from "@/page/quiz";
 import QuizLevelSelect from "@/page/quiz/level-select";
 import QuizTopicSelect from "@/page/quiz/topic-select";
 import QuizPlay from "@/page/quiz/quiz-play";
-import NotFound from "@/page/notfound";
+import { NotFound } from "@/page/notfound/index";
 import InvestingGame from "@/page/investing/game";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ParentShop from "./page/market/parent-shop";
