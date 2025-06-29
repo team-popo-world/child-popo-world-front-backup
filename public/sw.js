@@ -18,6 +18,7 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener('push', function (event) {
     // 푸시 메시지에 데이터가 포함되어 있는지 확인
     if (event.data) {
+      try {
       // 푸시 메시지 데이터를 JSON으로 파싱
       const data = event.data.json()
       
@@ -36,6 +37,19 @@ self.addEventListener('push', function (event) {
       // 알림을 화면에 표시
       // waitUntil은 비동기 작업이 완료될 때까지 서비스 워커를 활성 상태로 유지
       event.waitUntil(self.registration.showNotification(data.title, options))
+      } catch (error) {
+        console.log('JSON 파싱 실패, 텍스트로 처리:', error);
+        const text = event.data.text();
+        const options = {
+          body: text,
+          icon: '/icon.png',
+          vibrate: [100, 50, 100],
+          data: {
+            dateOfArrival: Date.now(),
+            primaryKey: '2',
+          },
+        };
+        event.waitUntil(self.registration.showNotification('알림', options));      }
     }
   })
    

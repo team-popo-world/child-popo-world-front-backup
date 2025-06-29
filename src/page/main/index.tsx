@@ -13,6 +13,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Tutorial from "@/module/main/template/Tutorial";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { subscribe } from "@/lib/utils/pushNotification";
+import { testAlert } from "@/lib/api/push/testAlert";
 
 // 섬별 위치 정보
 const ISLAND_POSITIONS = {
@@ -33,6 +34,7 @@ export default function Main() {
   // 로그인 후 메인페이지에서 푸시 알림 구독 
   useEffect(() => {
     subscribe();
+    // testAlert();
   }, []);
   
   // 첫페이지 로드시 배경음악 설정
