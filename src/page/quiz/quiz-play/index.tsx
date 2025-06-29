@@ -114,6 +114,9 @@ export default function QuizPlayPage() {
   const handleComplete = () => {
     playButtonSound();
     navigate("/quiz");
+    if(!isTutorialCompleted) {
+      navigate("/");
+    }
   };
 
   const calculateTotalPoint = () => {
