@@ -4,7 +4,6 @@ import { BackArrow } from "@/components/button/BackArrow";
 import type { Diary } from "../types/diary";
 import { WriteLimitModal } from "../components/writeLimitModal";
 import SoundButton from "@/components/button/SoundButton";
-import NameAndPoint from "@/components/user/NameAndPoint";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 
 interface EmotionDiaryTemplateProps {
@@ -34,14 +33,22 @@ export const EmotionDiaryTemplate = ({
     return `${year}년 ${month}월`;
   };
 
+  const isCurrentMonth = (date: Date) => {
+    const now = new Date();
+    return (
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth()
+    );
+  };
+
+  console.log(diaryData);
   return (
     <Background backgroundImage={IMAGE_URLS.emotionDiary.bg}>
       {/* 뒤로가기 */}
       <BackArrow onClick={onBack} />
       {/* 음소거 버튼 */}
       <SoundButton />
-      {/* 오른쪽 상단 총 금액 표시 (실제 포인트) */}
-      <NameAndPoint  />
+
       {/* 제목 */}
       <div
         aria-label="제목: 감정일기"
@@ -70,23 +77,28 @@ export const EmotionDiaryTemplate = ({
         </div>
         {/* 오른쪽 화살표 버튼 */}
         <img
-          src={IMAGE_URLS.emotionDiary.right_arrow}
-          alt="오른쪽 화살표"
-          className="h-[0.8rem] cursor-pointer "
+  src={IMAGE_URLS.emotionDiary.right_arrow}
+  alt="오른쪽 화살표"
+  className={`h-[0.8rem] cursor-pointer ${
+    isCurrentMonth(currentDate) ? "invisible pointer-events-none" : ""
+    }`}
           onClick={onNextMonth}
-        />
+/>
+
       </div>
 
       {/* 일기 리스트 */}
       <div className="flex justify-center items-center ml-[1rem] mt-[0.8rem] h-[12rem] px-[1rem] scrollbar-hidden">
         <div className=" flex flex-col gap-[0.4rem] w-[27rem]  items-center overflow-scroll h-full px-[0.8rem] scrollbar-hidden">
-          {diaryData.map((diary, index) => (
+          {diaryData.length === 0 ? (
+            <div className="flex justify-center items-center  bg-[#fffaf3ca] border border-[#f8e1b8] rounded-2xl py-[0.8rem] shadow-xs w-full h-[11.6rem] text-[#6a4d45b1] text-sm">작성된 일기가 없어요!</div>
+          ): (diaryData.map((diary, index) => (
             <DiaryCard
               key={diary.emotionDiaryId}
               diary={diary}
               order={index + 1}
             />
-          ))}
+          )))}
         </div>
       </div>
 

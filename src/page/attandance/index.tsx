@@ -99,8 +99,7 @@ export default function AttandancePage() {
 
   const handleAttendance = () => {
     playButtonSound();
-    console.log("isPointModalOpen", isPointModalOpen);
-    setIsPointModalOpen(true);
+    // setIsPointModalOpen(true);
     attendanceMutation.mutate(getToday());
   };
 

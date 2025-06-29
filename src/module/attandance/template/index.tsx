@@ -48,14 +48,17 @@ export function AttandanceTemplate({
         }
       >
         {/* 포인트 모달 */}
-        <PointModal
-          isOpen={isPointModalOpen}
-          onClose={handlePointModalClose}
-          title={"축하해요!"}
-          text={rewardText[isWeekCompleted ? "week" : "day"]}
-          price={rewardPoints}
-          onConfirm={handlePointModalClose}
-        />
+
+{!isAlreadyAttended && (
+  <PointModal
+    isOpen={isPointModalOpen}
+    onClose={handlePointModalClose}
+    title={"축하해요!"}
+    text={rewardText[isWeekCompleted ? "week" : "day"]}
+    price={rewardPoints}
+    onConfirm={handlePointModalClose}
+  />
+)}
 
         {isAlreadyAttended && (
           <Modal
@@ -100,7 +103,7 @@ export function AttandanceTemplate({
         />        
         )}
         {/* 월 화 수 목 금 토 일 */}
-        <div className="flex px-8 py-4 gap-x-3 bg-white rounded-2xl">
+        <div className="flex px-8 py-4 gap-x-3 bg-white rounded-2xl justify-center">
           {WEEK.map((day) => {
             const isAttended = attendance.find((item) => item.dayOfWeek === day)?.attended;
             return (

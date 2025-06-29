@@ -26,6 +26,7 @@ export default function Tutorial() {
 
     if (currentStep < totalSteps) {
       nextStep();
+      
     } else {
       setTutorialCompleted(true);
     }
