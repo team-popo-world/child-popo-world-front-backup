@@ -7,6 +7,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import Cookies from "js-cookie";
+import { useTutorialStore } from "./tutorialStore";
 
 /**
  * 인증 상태의 타입 정의
@@ -77,6 +78,9 @@ export const useAuthStore = create<AuthStore>()(
       logout: () => {
         Cookies.remove("refreshToken");
         set(INITIAL_AUTH_STATE);
+        // 튜토리얼 스토어 초기화
+        const tutorialStore = useTutorialStore.getState();
+        tutorialStore.setTutorialCompleted(false);
       },
       // 액세스 토큰 설정
       setAccessToken: (accessToken) => set({ accessToken }),

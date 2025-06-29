@@ -5,7 +5,7 @@ import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getInventory, type InventoryItem } from "@/lib/api/market/getInventory";
 import { useProduct } from "@/lib/api/market/useProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import InventoryTTS from "@/assets/sound/tutorial/inventory_tts_“여긴 너만의 창고야. 모아둔 걸 꺼내서 쓸 수 있어~!”_2025-06-28 (1).wav"
+import InventoryTTS from "@/assets/sound/pageSound/inventory_tts.wav"
 
 export const TEXT_MESSAGE = {
   not_product: {

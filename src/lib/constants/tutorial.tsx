@@ -1,14 +1,17 @@
-import tutorial_start from "@/assets/sound/tutorial/tutorial_start_“안녕~ 난 포포야! 포포월드에 온 걸 환영해! 재밌는 섬들이 가득해! 하나씩 같이 둘러보_2025-06-27.wav"
-import tutorial_sound from "@/assets/sound/tutorial/tutorial_sound__여기! 위에 있는 이 버튼을 누르면 신나는 음악이 짜잔~ 포포랑 같이 춤출 준비 됐지___2025-06-27.wav"
-import tutorial_attandance from "@/assets/sound/tutorial/tutorial_attandance_“매일 눌러봐~ 출석하면 포인트가 뿅!”_2025-06-27.wav"
-import tutoral_quiz from "@/assets/sound/tutorial/tutorial_quiz_“이건 퀴즈를 할 수 있는 버튼이야! 문제 맞히면 포인트가 짠!”_2025-06-27.wav"
-import tutorial_last from "@/assets/sound/tutorial/tutorial_last_“우와~ 포포월드 구경 잘했어_ 이제 넌 포포월드 탐험가야! 여러 섬에서 놀고, 포인트도 _2025-06-27 (1).wav"
+import tutorial_start from "@/assets/sound/tutorial/tutorial_start.wav"
+import tutorial_sound from "@/assets/sound/tutorial/tutorial_sound.wav"
+import tutorial_attandance1 from "@/assets/sound/tutorial/tutorial_attandance1.wav"
+import tutorial_attandance2 from "@/assets/sound/tutorial/tutorial_attandance2.wav"
+import tutoral_quiz from "@/assets/sound/tutorial/tutorial_quiz1.wav"
+import tutorial_last1 from "@/assets/sound/tutorial/tutorial_last1.wav"
 import { IMAGE_URLS } from "@/lib/constants/constants";
+
+
 
 export const tutorialOrder: Record<string, {text: React.ReactNode, sound: string}> = {
     // currentStep 1
     intro: {
-      text: <div className="absolute top-6 left-10 ">
+      text:  <div className="absolute top-6 left-10 ">
       <div className="absolute top-2 left-5 whitespace-nowrap">안녕~ 난 포포야! </div>
       <div className="absolute top-6.5 -left-1 whitespace-nowrap">포포월드에 온 걸 환영해!</div>
       <div className="absolute top-11 left-1 whitespace-nowrap">재밌는 섬들이 가득해! </div>
@@ -33,11 +36,11 @@ export const tutorialOrder: Record<string, {text: React.ReactNode, sound: string
     },
     // currentStep 3
     attendance1: {
-      text:<div className="absolute top-6 left-10 ">
-      <div className="absolute top-6 left-8 whitespace-nowrap">매일 눌러봐~  </div>
-      <div className="absolute top-11 left-1 whitespace-nowrap">출석하면 포인트가 뿅!</div>
+      text:<div className="absolute top-6 left-10 "> 
+      <div className="absolute top-6 left-4 whitespace-nowrap">출석하러 가볼까?  </div>
+      <div className="absolute top-11.5 left-1 whitespace-nowrap">요기 버튼 꾹 눌러줘~!</div>
     </div>,
-    sound: tutorial_attandance
+    sound: tutorial_attandance1
     },
 
     // currentStep 5
@@ -53,12 +56,12 @@ export const tutorialOrder: Record<string, {text: React.ReactNode, sound: string
     // currentStep 7
     last: {
       text: <div className="absolute top-6 left-10 ">
-      <div className="absolute top-1 left-0 whitespace-nowrap">우와~ 포포월드 구경 잘했어</div>
-      <div className="absolute top-5 left-0 whitespace-nowrap">이제 넌 포포월드 탐험가야!</div>
-      <div className="absolute top-9 left-0 whitespace-nowrap">여러 섬에서 놀고, 포인트도 모으고</div>
-      <div className="absolute top-14 left-0 whitespace-nowrap">포포랑 매일매일 신나는 모험을 가보자</div>
+      <div className="absolute top-2.5 left-5 whitespace-nowrap">우와~ 다 배웠다!</div>
+      <div className="absolute top-7.5 -left-1 whitespace-nowrap">이제 넌 포포월드 전문가! </div>
+      <div className="absolute top-12.5 left-4 whitespace-nowrap">진짜탐험, 지금부터</div>
+      <div className="absolute top-17.5 left-9 whitespace-nowrap">시작이야~!</div>
     </div>,
-    sound: tutorial_last
+    sound: tutorial_last1
     },
   };
   
@@ -66,10 +69,10 @@ export const tutorialAttandance: Record<string, {text: React.ReactNode, sound: s
     // currentStep 4
     attendance2: {
       text:<div className="absolute top-6 left-10 ">
-      <div className="absolute top-6 left-8 whitespace-nowrap">매일 눌러봐~  </div>
-      <div className="absolute top-11 left-1 whitespace-nowrap">출석하면 포인트가 뿅!</div>
+      <div className="absolute top-6 left-7 whitespace-nowrap">매일 눌러봐~  </div>
+      <div className="absolute top-11.5 left-0.5 whitespace-nowrap">출석하면 포인트가 뿅!</div>
     </div>,
-    sound: tutorial_attandance
+    sound: tutorial_attandance2
     },
 }
   export const tutorialQuiz: Record<string, {text: React.ReactNode, sound: string}> = {

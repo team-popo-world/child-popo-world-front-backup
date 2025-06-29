@@ -20,7 +20,10 @@ export default function Tutorial() {
   
   const totalSteps = Object.keys(tutorialOrder).length;
 
-  const handleNextStep = () => {
+  const handleNextStep = (button: string) => {
+    if(currentStep === 3 && button != "attandance") return;
+    if(currentStep === 4 && button != "quiz") return 
+
     if (currentStep < totalSteps) {
       nextStep();
     } else {
@@ -36,7 +39,7 @@ export default function Tutorial() {
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-black/25" onClick={handleNextStep}></div>
+      <div className="fixed inset-0 z-50 bg-black/25" onClick={() => handleNextStep("bg")}></div>
       <Background backgroundImage={IMAGE_URLS.main.bg}>
         {/* 여백 */}
         <div className="h-[1.9rem]"></div>
@@ -69,12 +72,12 @@ export default function Tutorial() {
             <TopArrow
               className="absolute left-[6.45rem] top-[2.9rem] z-90 animate-bounce"
               color="#F7F7F7"
-              size={52}
+              size="1.7rem"
             />
           </>
         )}
         {/* 퀴즈 */}
-        <Link to="/quiz" onClick={() => {playButtonSound(); handleNextStep()}}>
+        <Link to="/quiz" onClick={() => {playButtonSound(); handleNextStep("quiz")}}>
         <div className="absolute top-[0.5rem] right-[9.8rem]  flex flex-col justify-center items-center ">
             <img src={IMAGE_URLS.main.quiz} alt="quiz" className={clsx("w-[1.8rem]", currentStep === 4 && "z-100")} />
             <TextWithStroke
@@ -90,7 +93,7 @@ export default function Tutorial() {
 
 
         {/* 출석 */}
-        <Link to="/attandance" onClick={() => {playButtonSound(); handleNextStep()}} className="absolute top-[0.6rem]  right-[7.6rem]  flex flex-col items-center justify-center ">
+        <Link to="/attandance" onClick={() => {playButtonSound(); handleNextStep("attandance")}} className="absolute top-[0.6rem]  right-[7.6rem]  flex flex-col items-center justify-center ">
           <img src={IMAGE_URLS.main.attendance} alt="attandance" className={clsx("w-[1.8rem]", currentStep === 3 && "z-100")} />
           <TextWithStroke
             text="출석"
@@ -104,7 +107,7 @@ export default function Tutorial() {
             <TopArrow
               className="absolute right-[7.65rem] top-[2.9rem] z-90 animate-bounce"
               color="#F7F7F7"
-              size={52}
+              size="1.7rem"
             />
           </>
         )}

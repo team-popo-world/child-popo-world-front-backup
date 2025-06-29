@@ -15,7 +15,7 @@ import SavingsBackgroundMusic from "@/assets/sound/saving.mp3";
 import SoundButton from "@/components/button/SoundButton";
 import backClickSound from "@/assets/sound/back_click.mp3";
 import NameAndPoint from "@/components/user/NameAndPoint";
-import SavingsTTS from "@/assets/sound/tutorial/savings_tts_“차곡차곡~ 저축 섬 도착! 오늘도 모아볼까_”_2025-06-27.wav"
+import SavingsTTS from "@/assets/sound/pageSound/savings_tts.wav"
 
 const IS_TEST_MODE = false;
 

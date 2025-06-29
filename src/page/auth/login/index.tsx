@@ -33,9 +33,9 @@ export default function LoginPage() {
     if (result.success && result.data && result.accessToken) {
       // 액세스 토큰 저장
       setAccessToken(result.accessToken);
-
       // 사용자 정보 저장
       setLoginState(result.data.name, result.data.point, form.email);
+      // 로컬 스토리지 초기화
       queryClient.clear();
       // 메인 페이지로 이동
       navigate("/");

@@ -24,11 +24,6 @@ import ProtectedRouter from "@/components/auth/ProtectedRouter";
 import LoginPage from "./page/auth/login";
 import RegisterPage from "./page/auth/register";
 import { BrowserRouter } from "react-router-dom";
-// import { getUser } from "./lib/api/user/getUser";
-// import { useEffect } from "react";
-// import { useAuthStore } from "./lib/zustand/authStore";
-// import Cookies from "js-cookie";
-
 
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient({
@@ -40,44 +35,7 @@ const queryClient = new QueryClient({
   },
 });
 
-
-
 function App() {
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //     if (!Cookies.get("refreshToken")) return;
-  //     const response = await getUser();
-  //     console.log(response);
-  //     // 액세스 토큰 저장  
-  //     const accessToken = response.headers["authorization"]?.replace("Bearer ", "");
-  //     if (accessToken) {
-  //       useAuthStore.getState().setAccessToken(accessToken);
-  //     }
-  
-  //     // 리프레시 토큰 저장
-  //     const refreshToken = response.headers["refresh-token"];
-  //     if (refreshToken) {
-  //       Cookies.set("refreshToken", refreshToken, {
-  //         expires: 14, // 14일 후 만료
-  //         secure: true,
-  //         sameSite: "strict", // CSRF 공격 방지
-  //       });
-  //     }
-  
-  //     // 사용자 정보 저장
-  //     if (response.data) {
-  //         useAuthStore.getState().login(response.data.name, response.data.point);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user:", error);
-  //       useAuthStore.getState().logout();
-  //     }
-  //   };
-  
-  //   fetchUser();
-  // }, []);
-  console.log("test");
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

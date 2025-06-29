@@ -74,7 +74,7 @@ export const QuizTemplate = ({ onBack,onClickQuiz,isModalOpen,onCloseModal,isTut
       
       {/* 튜토리얼 버튼 */}
       {(!isTutorialCompleted) && (
-        <BottomArrow size={80} color="#F65636" className="absolute right-1/2 translate-x-1/2 bottom-[8.2rem] z-190 animate-bounce " />
+        <BottomArrow size={"3rem"} color="#F65636" className="absolute right-1/2 translate-x-1/2 bottom-[8.2rem] z-190 animate-bounce " />
       )}
 
       {/* 작성제한모달 */}

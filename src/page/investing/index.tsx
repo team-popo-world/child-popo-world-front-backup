@@ -10,7 +10,7 @@ import InvestingBackgroundMusic from "@/assets/sound/invest.mp3";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import {getChapterData} from "@/lib/api/invest-game/getChapterData";
 import { useQueryClient } from '@tanstack/react-query';
-import InvestingTTS from "@/assets/sound/tutorial/invest_tts_“모의투자 섬 도착! 오늘은 어디에 투자해볼까_”_2025-06-27.wav"
+import InvestingTTS from "@/assets/sound/pageSound/invest_tts.wav"
 
 export const chaptersInfo = {
   "little-pig":{

@@ -4,7 +4,7 @@ import { playButtonSound, playSound, setNewAudio, stopBackgroundMusic } from "@/
 import { useEffect } from "react";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import QuestBackgroundMusic from "@/assets/sound/quest.mp3";
-import QuestTTS from "@/assets/sound/tutorial/quest_tts_“작은 약속~ 지켜볼까_ 오늘도 멋지게 도전!”_2025-06-27.wav"
+import QuestTTS from "@/assets/sound/pageSound/quest_tts.wav"
 
 export default function QuestPage() {
   const navigate = useNavigate();

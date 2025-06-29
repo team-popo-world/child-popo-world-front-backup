@@ -6,7 +6,7 @@ import { IMAGE_URLS } from "@/lib/constants/constants";
 import { playSound, setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import MarketBackgroundMusic from "@/assets/sound/market.mp3";
-import MarketTTS from "@/assets/sound/tutorial/market_tts_“시장 섬에 온 걸 환영해! 뭘 사러 온 거야~_”_2025-06-27.wav"
+import MarketTTS from "@/assets/sound/pageSound/market_tts.wav"
 
 const marketPageImages = [
   IMAGE_URLS.market.bg,

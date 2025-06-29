@@ -7,7 +7,7 @@ import { useSoundStore } from "@/lib/zustand/soundStore";
 import EmotionDiaryBackgroundMusic from "@/assets/sound/diary.mp3";
 import { getDiary } from "@/lib/api/emotion/getDiary";
 import { useQuery } from "@tanstack/react-query";
-import EmotionDiaryTTS from "@/assets/sound/tutorial/diary_tts_“포포는 네 마음이 궁금해! 같이 써보자~”_2025-06-27.wav"
+import EmotionDiaryTTS from "@/assets/sound/pageSound/diary_tts.wav"
 
 export default function EmotionDiaryPage() {
   const navigate = useNavigate();

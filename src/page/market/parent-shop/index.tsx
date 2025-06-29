@@ -6,7 +6,7 @@ import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getStoreItems, type StoreItem } from "@/lib/api/market/getStore";
 import { buyProduct } from "@/lib/api/market/buyProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import ParentShopTTS from "@/assets/sound/tutorial/parent_shop_tts_“엄마가 준비한 선물 보러 왔구나!  맘에 드는 거 골라봐~”_2025-06-27.wav"
+import ParentShopTTS from "@/assets/sound/pageSound/parent_shop_tts.wav"
 
 export const TEXT_MESSAGE = {
   not_product: {

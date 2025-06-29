@@ -11,7 +11,7 @@ import backClickSound from "@/assets/sound/back_click.mp3";
 import { getFeeds, feedPopo } from "@/lib/api/raising/raising";
 import type { Feed } from "@/lib/api/raising/raising";
 import { ToRasingLandLoading2 } from "@/components/loading/ToRasingLandLoading2";
-import RaisingTTS from "@/assets/sound/tutorial/rasing_tts“배고픈 포포 기다리는 중~ 냠냠~ 먹이 주러 가자”_2025-06-28.wav"
+import RaisingTTS from "@/assets/sound/pageSound/rasing_tts.wav"
 // 먹이 이미지 매핑
 const feedImageMap: Record<string, keyof typeof IMAGE_URLS.raising> = {
   "당근": "carrot",

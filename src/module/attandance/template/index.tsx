@@ -129,7 +129,7 @@ export function AttandanceTemplate({
         </div>
         {/* 튜토리얼 버튼 */}
         {(!isTutorialCompleted && !isPointModalOpen) && (
-            <BottomArrow size={80} color="#F48A00" className="absolute right-1/2 translate-x-1/2 bottom-[5.5rem] z-190 animate-bounce " />
+            <BottomArrow size="3rem" color="#F48A00" className="absolute right-1/2 translate-x-1/2 bottom-[5.8rem] z-190 animate-bounce " />
         )}
       </div>
     </div>
