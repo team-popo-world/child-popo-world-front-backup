@@ -57,7 +57,6 @@ export default function AttandancePage() {
       if(point !== null) setPoint(point + data.rewardPoints);
       setIsWeekCompleted(data.weekCompleted);
       setIsPointModalOpen(true);
-
       queryClient.invalidateQueries({ queryKey: ["attendance"], refetchType: "all" });
     },
     onError: () => {
@@ -98,8 +97,7 @@ export default function AttandancePage() {
 
   const handleAttendance = () => {
     playButtonSound();
-    console.log("isPointModalOpen", isPointModalOpen);
-    setIsPointModalOpen(true);
+    // setIsPointModalOpen(true);
     attendanceMutation.mutate(getToday());
   };
 

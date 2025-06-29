@@ -84,7 +84,7 @@ export const InvestingTemplate = ({
         {/* 보유 코인 */}
         <div
           aria-label="보유 코인 금액"
-          className="mt-[0.4rem] bg-amber-100 rounded-2xl p-[0.15rem] border-[0.1rem] border-[#795c2d]"
+          className="mt-[0.4rem] bg-amber-100 rounded-2xl w-fit px-[0.2rem] py-[0.05rem] border-[0.1rem] border-[#795c2d]"
         >
           <div className="flex justify-center items-center mr-[0.5rem]">
             <img
@@ -94,9 +94,9 @@ export const InvestingTemplate = ({
             />
             <TextWithStroke
               text={`${point?.toString()}냥`}
-              className="ml-[0.2rem]"
-              textClassName="text-main-yellow-800 text-[1.1rem]"
-              strokeClassName="text-main-brown-800 text-[1.1rem] text-stroke-width-[0.2rem] text-stroke-color-main-brown-800"
+              className="ml-[0.3rem] mt-[0.08rem]"
+              textClassName="text-main-yellow-800 text-[1rem]"
+              strokeClassName="text-main-brown-800 text-[1rem] text-stroke-width-[0.2rem] text-stroke-color-main-brown-800"
             />
           </div>
         </div>
@@ -114,7 +114,7 @@ export const InvestingTemplate = ({
       {/* 챕터 제목, 가격 */}
       <TextWithStroke
         text="아기돼지 삼형제"
-        className="absolute left-[2.7rem] bottom-[3.85rem]"
+        className="absolute left-[2.7rem] bottom-[3.5rem]"
         textClassName="text-main-yellow-150 text-[1.3rem]"
         strokeClassName="text-investing-orange-100 text-[1.3rem] text-stroke-width-[0.6rem] text-stroke-color-main-brown-800"
       />
@@ -122,7 +122,7 @@ export const InvestingTemplate = ({
       {/* 푸드트럭 */}
       <TextWithStroke
         text="푸드트럭 왕국"
-        className="absolute left-[18.7rem] bottom-[3.85rem]"
+        className="absolute left-[18.7rem] bottom-[3.5rem]"
         textClassName="text-main-yellow-150 text-[1.3rem]"
         strokeClassName="text-investing-yellow-100 text-[1.3rem] text-stroke-width-[0.6rem] text-stroke-color-main-brown-800"
       />
@@ -130,15 +130,15 @@ export const InvestingTemplate = ({
       {/* 마법 */}
       <TextWithStroke
         text="마법 왕국"
-        className="absolute right-[12.1rem] top-[15.5rem]"
+        className="absolute right-[12rem] top-[16rem]"
         textClassName="text-main-yellow-150 text-[1.3rem]"
         strokeClassName="text-investing-purple-100 text-[1.3rem] text-stroke-width-[0.6rem] text-stroke-color-main-brown-800"
       />
-      <Info price="3000냥" className="absolute left-[4.5rem] bottom-[1rem]" />
+      <Info price="3000냥" className="absolute left-[4.3rem] bottom-[1rem]" />
       {/* 달빛 */}
       <TextWithStroke
         text="달빛 도둑"
-        className="absolute left-[7.4rem] top-[15.5rem]"
+        className="absolute left-[7.4rem] top-[16rem]"
         textClassName="text-main-yellow-150 text-[1.3rem]"
         strokeClassName="text-investing-blue-100 text-[1.3rem] text-stroke-width-[0.6rem] text-stroke-color-main-brown-800"
       />
