@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Main from "@/page/main";
 import Investing from "@/page/investing";
 import Market from "@/page/market";
@@ -24,6 +25,10 @@ import ProtectedRouter from "@/components/auth/ProtectedRouter";
 import LoginPage from "./page/auth/login";
 import RegisterPage from "./page/auth/register";
 import { BrowserRouter } from "react-router-dom";
+import { getPublicKey } from "./lib/api/push/getPublicKey";
+import { postSubscribe } from "./lib/api/push/postSubscribe";
+import { urlBase64ToUint8Array, arrayBufferToBase64 } from "./lib/utils/urlBase64ToUint8Array";
+import { testAlert } from "./lib/api/push/test_alert";
 
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient({
@@ -36,6 +41,59 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  // 1. 핸드폰 기기에서 알림 권한 요청
+  // 2. 서버에서 공개키 받음
+  // 3. 공개키로 구독 정보 생성
+  // 4. 구독 정보를 서버로 보냄
+  // 5. 서버에서 푸시 메시지 전송
+  // 6. 푸시 메시지 수신
+  // 7. 푸시 메시지 표시
+  // 8. 푸시 메시지 클릭 시 앱 실행
+  // 9. 푸시 메시지 삭제
+  useEffect(() => {
+    // 푸시 알림 구독 및 서버 전송 로직
+    const subscribe = async () => {
+      // 1. 브라우저에 알림 권한 요청
+      await Notification.requestPermission(); 
+      
+      // 2. 서버에서 VAPID 공개키 받아오기
+      console.log("publicKey");
+      const publicKey = await getPublicKey();
+      console.log(publicKey);
+      
+      // 3. 서비스 워커가 준비될 때까지 대기
+      const resistration = await navigator.serviceWorker.ready;
+
+      // 4. PushManager를 통해 푸시 구독 생성 (이미 구독된 경우 에러 발생 가능)
+      const subscription: PushSubscription = await resistration.pushManager.subscribe({
+        userVisibleOnly: true, // 반드시 사용자에게 알림이 보여야 함
+        applicationServerKey: urlBase64ToUint8Array(publicKey), // 서버에서 받은 공개키를 변환하여 사용
+      });
+      
+      // 5. 구독 객체에서 암호화 키 추출
+      const p256dhKey = subscription.getKey('p256dh'); // 메시지 암호화용 공개키
+      const authKey = subscription.getKey('auth');     // 인증용 비밀값
+      console.log("p256dhKey", p256dhKey);
+      console.log("authKey", authKey);
+      
+      // 6. 두 키가 모두 존재할 때만 서버로 구독 정보 전송
+      if( p256dhKey && authKey) {
+        const p256dh = arrayBufferToBase64(p256dhKey); // ArrayBuffer를 Base64 문자열로 변환
+        const auth = arrayBufferToBase64(authKey);
+        const response = await postSubscribe(subscription.endpoint, p256dh, auth);  // 서버에 구독 정보 전송
+        console.log("response, postSubscribe", response);
+        await testAlert();
+      } else {
+        // 키가 없을 경우 에러 로그 출력
+        console.log("p256dh or auth key가 없음");
+      }
+    };
+    // 컴포넌트 마운트 시 구독 함수 실행
+    console.log("subscribe");
+    subscribe();
+  }, []);
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
