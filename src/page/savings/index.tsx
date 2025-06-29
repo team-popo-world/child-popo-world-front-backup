@@ -24,11 +24,12 @@ const MAX_DEPOSIT_RATE = 0.2; // 20%
 const BONUS_RATE = 0.1; // 10%
 
 import { createSavingsAccount, getSavingsAccount, depositToSavings } from "@/lib/api/savings/savings";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 export default function SavingsPage() {
   const navigate = useNavigate();
   const { isMuted, audio } = useSoundStore();
-  const { point, setPoint, email } = useAuthStore();
+  const { point, setPoint, email, name: userName } = useAuthStore();
 
   // 저장소 키 생성 함수
   const getSavingsKey = (date: string) => {
@@ -318,6 +319,7 @@ export default function SavingsPage() {
     if (result.success) {
       setCurrentAmount("0");
       setIsCreated(true);
+      postPushMessage(`${userName}님이 저축 통장을 개설했어요!`);
     }
   };
 

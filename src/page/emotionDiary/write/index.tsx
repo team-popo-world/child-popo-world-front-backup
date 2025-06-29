@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { postDiary } from "@/lib/api/emotion/postDiary";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { playButtonSound } from "@/lib/utils/sound";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
+import { useAuthStore } from "@/lib/zustand/authStore";
 
 export default function EmotionDiaryWritePage() {
   const navigate = useNavigate();
@@ -12,11 +14,13 @@ export default function EmotionDiaryWritePage() {
   const [description, setDescription] = useState<string>(
     "이 날의 이야기는 마음속에만 담아두었어요."
   );
+  const { name: userName } = useAuthStore();
   const queryClient = useQueryClient();
   const postDiaryMutation = useMutation({
     mutationFn: ({emotion, description}: {emotion: string, description: string}) => postDiary({emotion, description}),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["diary"] });
+      postPushMessage(`${userName}님이 감정 일기를 작성했어요!`);
       navigate("/emotionDiary");
     },
     onError: (error) => {

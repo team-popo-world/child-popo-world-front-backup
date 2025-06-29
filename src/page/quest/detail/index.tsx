@@ -9,6 +9,7 @@ import backClickSound from "@/assets/sound/back_click.mp3";
 import { getQuest } from "@/lib/api/quest/getQuest";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { postQuestState } from "@/lib/api/quest/postQuestState";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 const questStateMap: Record<string, Quest["state"]> = {
   PENDING_ACCEPT: "수락하기",
@@ -59,7 +60,8 @@ export default function QuestDetail() {
 
   const { setPoint } = useAuthStore();
   const queryClient = useQueryClient(); 
-  
+  const { name: userName } = useAuthStore();
+
   const total = questData.filter(
     (q) =>
       q.state === "기다리는 중" ||
@@ -74,7 +76,6 @@ export default function QuestDetail() {
   const {data: responseQuestData, isLoading, error} = useQuery({
     queryKey: ["quest", questType],
     queryFn: () => getQuest(questType),
-    staleTime: 0,
   });
 
   useEffect(() => {
@@ -134,8 +135,16 @@ export default function QuestDetail() {
   ) => {
     playButtonSound();
     const modalMessage = MatchModalText[state];
+
+    // 다 했어요 눌렀을 경우 푸시 알림 전송
+    if (modalMessage == "다 했어요") {
+      postPushMessage(`${userName}님이 퀘스트를 완료했어요!`);
+    }
+    if(modalMessage == "수락하기") {
+      postPushMessage(`${userName}님이 퀘스트를 수락했어요!`);
+    }
+    // 수락하기, 다 했어요 눌렀을 경우 모달창 띄우기, 상태변경
     if (modalMessage) {
-      // 수락하기, 다 했어요 눌렀을 경우 모달창
       setModalText(modalMessage);
       setIsModalOpen(true);
       setPendingChange({ questId, childId, state });

@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Main from "@/page/main";
 import Investing from "@/page/investing";
 import Market from "@/page/market";
@@ -21,6 +22,7 @@ import ParentShop from "./page/market/parent-shop";
 import NpcShop from "./page/market/npc-shop";
 import Inventory from "./page/market/inventory";
 import ProtectedRouter from "@/components/auth/ProtectedRouter";
+import PushNotificationProvider from "@/components/layout/PushNotificationProvider";
 import LoginPage from "./page/auth/login";
 import RegisterPage from "./page/auth/register";
 import { BrowserRouter } from "react-router-dom";
@@ -36,47 +38,61 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  // 1. 핸드폰 기기에서 알림 권한 요청
+  // 2. 서버에서 공개키 받음
+  // 3. 공개키로 구독 정보 생성
+  // 4. 구독 정보를 서버로 보냄
+  // 5. 서버에서 푸시 메시지 전송
+  // 6. 푸시 메시지 수신
+  // 7. 푸시 메시지 표시
+  // 8. 푸시 메시지 클릭 시 앱 실행
+  // 9. 푸시 메시지 삭제
+
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ProtectedRouter />}>
-            <Route index element={<Main />} />
-            {/* 투자 */}
-            <Route path="/investing">
-              <Route index element={<Investing />} />
-              <Route path="game/:gametype" element={<InvestingGame />} />
-            </Route>
-            {/* 시장 */}
-            <Route path="/market">
-              <Route index element={<Market />} />
-              <Route path="parent" element={<ParentShop />} />
-              <Route path="npc" element={<NpcShop />} />
-              <Route path="inventory" element={<Inventory />} />
-            </Route>
-            {/* 저축통장 */}
-            <Route path="/savings" element={<Savings />} />
-            {/* 퀘스트 */}
-            <Route path="/quest">
-              <Route index element={<Quest />} />
-              <Route path="detail/:questType" element={<QuestDetail />} />
-              <Route path="detail/complete" element={<QuestComplete />} />
-            </Route>
-            {/* 포포 키우기 */}
-            <Route path="/raising" element={<Raising />} />
-            {/* 감정일기 */}
-            <Route path="/emotionDiary">
-              <Route index element={<EmotionDiary />} />
-              <Route path="write" element={<DiaryWrite />}></Route>
-            </Route>
-            {/* 출석 */}
-            <Route path="/attandance" element={<Attandance />} />
-            {/* 퀴즈 */}
-            <Route path="/quiz">
-              <Route index element={<Quiz />} />
-              <Route path="level-select" element={<QuizLevelSelect />}></Route>
-              <Route path=":level" element={<QuizTopicSelect />}></Route>
-              <Route path=":level/:topic" element={<QuizPlay />}></Route>
+            <Route element={<PushNotificationProvider queryClient={queryClient} />}>
+              <Route index element={<Main />} />
+              {/* 투자 */}
+              <Route path="/investing">
+                <Route index element={<Investing />} />
+                <Route path="game/:gametype" element={<InvestingGame />} />
+              </Route>
+              {/* 시장 */}
+              <Route path="/market">
+                <Route index element={<Market />} />
+                <Route path="parent" element={<ParentShop />} />
+                <Route path="npc" element={<NpcShop />} />
+                <Route path="inventory" element={<Inventory />} />
+              </Route>
+              {/* 저축통장 */}
+              <Route path="/savings" element={<Savings />} />
+              {/* 퀘스트 */}
+              <Route path="/quest">
+                <Route index element={<Quest />} />
+                <Route path="detail/:questType" element={<QuestDetail />} />
+                <Route path="detail/complete" element={<QuestComplete />} />
+              </Route>
+              {/* 포포 키우기 */}
+              <Route path="/raising" element={<Raising />} />
+              {/* 감정일기 */}
+              <Route path="/emotionDiary">
+                <Route index element={<EmotionDiary />} />
+                <Route path="write" element={<DiaryWrite />}></Route>
+              </Route>
+              {/* 출석 */}
+              <Route path="/attandance" element={<Attandance />} />
+              {/* 퀴즈 */}
+              <Route path="/quiz">
+                <Route index element={<Quiz />} />
+                <Route path="level-select" element={<QuizLevelSelect />}></Route>
+                <Route path=":level" element={<QuizTopicSelect />}></Route>
+                <Route path=":level/:topic" element={<QuizPlay />}></Route>
+              </Route>
             </Route>
           </Route>
           {/* 로그인 */}

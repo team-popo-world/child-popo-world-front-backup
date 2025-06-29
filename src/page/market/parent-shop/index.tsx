@@ -7,6 +7,7 @@ import { getStoreItems, type StoreItem } from "@/lib/api/market/getStore";
 import { buyProduct } from "@/lib/api/market/buyProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ParentShopTTS from "@/assets/sound/pageSound/parent_shop_tts.wav"
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 export const TEXT_MESSAGE = {
   not_product: {
@@ -33,14 +34,13 @@ export const TEXT_MESSAGE = {
 
 export default function NpcShop() {
   const navigate = useNavigate();
-  const { setPoint, point } = useAuthStore();
+  const { setPoint, point, name: userName } = useAuthStore();
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [productIndex, setProductIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<StoreItem | null>(null);
   const [isCompleteOpen, setIsCompleteOpen] = useState(false);
   const [isNoPointModalOpen, setIsNoPointModalOpen] = useState(false);  
   const queryClient = useQueryClient();
-
   const { data: storeItems } = useQuery({
     queryKey: ["store-items", "parent"],
     queryFn: () => getStoreItems("parent"),
@@ -59,14 +59,15 @@ export default function NpcShop() {
       
       queryClient.invalidateQueries({ queryKey: ["store-items", "parent"], refetchType:"all"});
       queryClient.invalidateQueries({ queryKey: ["inventory-items"], refetchType:"all"});
+      // 상품 구매시 메시지
+      postPushMessage(`${userName}님이 상품을 구매했어요!`);
     }, 
     onError: (error) => {
       console.error("Failed to buy product", error); 
     }
   })
 
-  const lastIndex = Math.ceil(storeItems?.length || 0 / 3) - 1;
-
+  const lastIndex = Math.ceil((storeItems?.length || 0) / 3) - 1;
   const getMessage = () => {
     if (storeItems?.length === 0) {
       return TEXT_MESSAGE.not_product;
