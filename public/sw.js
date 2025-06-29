@@ -1,3 +1,18 @@
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+  console.log("[SW] Installed");
+});
+
+self.addEventListener("activate", (event) => {
+  clients.claim();
+  console.log("[SW] Activated");
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(fetch(event.request));
+});
+
+
 // 푸시 알림 이벤트 리스너
 // 서버에서 푸시 메시지가 전송될 때 실행됨
 self.addEventListener('push', function (event) {
