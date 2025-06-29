@@ -1,7 +1,6 @@
 import { BackArrow } from "@/components/button/BackArrow";
 import { Background } from "../../../components/layout/Background";
 import { TextWithStroke } from "@/components/text/TextWithStroke";
-import NameAndPoint from "@/components/user/NameAndPoint";
 import SoundButton  from "@/components/button/SoundButton";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 interface QuestTemplateProps {
@@ -19,8 +18,6 @@ export const QuestTemplate = ({ onClickQuest, onBack }: QuestTemplateProps) => {
       <BackArrow onClick={onBack} />
       {/* 사운드 */}
       <SoundButton />
-      {/* 오른쪽 상단 총 금액 표시 (실제 포인트) */}
-      <NameAndPoint pointTextColor="text-main-yellow-200" />
       {/* 부모 퀘스트 집 이미지, 일일 퀘스트 시계탑 이미지 및 텍스트 */}
       <img
         src={IMAGE_URLS.quest.quest_map_page_parent}

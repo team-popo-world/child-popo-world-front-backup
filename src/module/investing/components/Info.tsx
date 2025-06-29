@@ -17,7 +17,7 @@ export const Info = ({ price, style, className }: InfoProps) => {
       style={style}
     >
       <img
-        src="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1748951657/common_coin_oii3sa.webp"
+        src="https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1748951657/common_coin_oii3sa"
         alt="코인"
         className="h-6"
       />

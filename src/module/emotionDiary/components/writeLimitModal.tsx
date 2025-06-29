@@ -1,4 +1,5 @@
 import { Modal } from "@/components/modal/Modal";
+import { IMAGE_URLS } from "@/lib/constants/constants";
 
 interface WriteLimitModalProps {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export const WriteLimitModal = ({ isOpen, onClose }: WriteLimitModalProps) => {
 
         {/* 포포 */}
         <img
-          src="https://res.cloudinary.com/dgmbxvpv9/image/upload/v1749625181/emotion-popo_wpurr1.webp"
+          src={IMAGE_URLS.emotionDiary.modal_popo2}
           alt="포포"
           className="absolute w-[8rem] right-[-4rem] bottom-[-1rem]"
         />
