@@ -148,22 +148,22 @@ export const GameStart = ({
       />
       <TextWithStroke
         text={subtitle}
-        className="mb-9"
+        className="mb-10"
         textClassName="text-[1.5rem] font-bold"
         strokeClassName="text-[1.5rem] font-bold text-stroke-width-[0.3rem]"
         textColor={subtitleTextColor}
         strokeColor={subtitleStrokeColor}
       />
       {/* 주식들 */}
-      <section className="flex justify-center items-center gap-x-8 mb-5">
+      <section className="flex justify-center items-center  ml-1 mb-2 pr-5 gap-x-7">
         {characters.map((char, index) => (
-          <div key={index} className="relative flex flex-col justify-center items-center gap-y-0.5">
-            <img src={char.image} alt={char.alt} className="min-w-0 h-31 object-contain" />
+          <div key={index} className="relative flex flex-col justify-center items-center gap-y-0">
+            <img src={char.image} alt={char.alt} className="min-w-0 h-37 object-contain" />
             <div
-              className="px-5 ml-3 rounded-lg border-2 xl:border-4 text-center"
+              className="px-[1rem] ml-[0.2rem] rounded-lg border-[0.13rem] flex justify-center items-center py-[0.25rem]"
               style={{ backgroundColor: stockButtonBgColor, borderColor: stockButtonStrokeColor }}
             >
-              <span className="text-white text-xs font-bold">{char.label}</span>
+              <span className="text-white text-[0.85rem] font-bold">{char.label}</span>
             </div>
           </div>
         ))}
