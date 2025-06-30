@@ -79,9 +79,7 @@ export const useAuthStore = create<AuthStore>()(
       // 로그아웃 액션
       logout: async () => {
         const { email } = get();
-        console.log("email", email);
         if (email) await logoutUser(email);
-        console.log("logoutUser");
         Cookies.remove("refreshToken");
         set(INITIAL_AUTH_STATE);
         console.log(email);

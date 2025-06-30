@@ -16,13 +16,6 @@ export const subscribe = async () => {
       });
     }
 
-    // 1. 브라우저에 알림 권한 요청
-    const permission = await Notification.requestPermission();
-    if (permission !== "granted") {
-      console.log("알림 권한이 거부되었습니다.");
-      return;
-    }
-
     // 2. 서버에서 VAPID 공개키 받아오기
     const publicKey = await getPublicKey();
 

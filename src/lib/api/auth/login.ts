@@ -22,10 +22,10 @@ export interface LoginResult {
   refreshToken?: string;
 }
 
-export const login = async (loginData: LoginRequest): Promise<LoginResult> => {
+export const loginUser = async (loginData: LoginRequest): Promise<LoginResult> => {
   try {
     const response = await apiClient.post("/auth/login", loginData);
-
+    console.log("response login", response.data);
     // 액세스 토큰 추출
     const accessToken = response.headers["authorization"]?.replace("Bearer ", "");
     

@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../../styles/toast.css";
 import { useAuthStore } from "@/lib/zustand/authStore";
 import { IMAGE_URLS } from "@/lib/constants/constants";
-import { login } from "@/lib/api/auth/login";
+import { loginUser } from "@/lib/api/auth/login";
 import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
 import { subscribe } from "@/lib/utils/pushNotification";
@@ -22,17 +22,34 @@ export default function LoginPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+
+  useEffect(() => {
+    // 1. 브라우저에 알림 권한 요청
+      const handlePermission = async () => {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        console.log("알림 권한이 거부되었습니다.");
+        return;
+      } 
+    };
+    handlePermission();
+  }, []);
+
   useEffect(() => {
     const handleSubscribe = async () => {
       if (accessToken) {
-        await subscribe();
+        try{
+          await subscribe();
+          if (isAuthenticated) {
+            navigate("/");
+          }
+        } catch (error) {
+          console.error("푸시 알림 구독 실패:", error);
+        }
       }
     };
     handleSubscribe();
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [accessToken]);
+  }, [accessToken, isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +58,7 @@ export default function LoginPage() {
       return;
     }
 
-    const result = await login(form);
+    const result = await loginUser(form);
     if (result.success && result.data && result.accessToken) {
       // 액세스 토큰 저장
       setAccessToken(result.accessToken);

@@ -14,11 +14,12 @@ self.addEventListener("fetch", (event) => {
 
 
 // 푸시 알림 이벤트 리스너
-// 서버에서 푸시 메시지가 전송될 때 실행됨
+// 서버에서 푸시 메시지가 전송될 때 실행됨, 알림 올떄 
 self.addEventListener('push', function (event) {
     // 푸시 메시지에 데이터가 포함되어 있는지 확인
     if (event.data) {
       try {
+        // 알림 텍스트온거 
         const text = event.data.text();
         const options = {
           body: text,                    // 알림 본문 내용
@@ -32,6 +33,7 @@ self.addEventListener('push', function (event) {
         // 알림 표시
         event.waitUntil(self.registration.showNotification('알림', options));   
         // 알림 표시후 메인 앱에 메시지 전송, 이게 클라이언트들 이라고 뜨는 이유는 모든 탭들이 클라이언트들이기 때문
+        // 여기서 메인 앱에 메시지 전송
         event.waitUntil(
           self.clients.matchAll().then(clients => {
             clients.forEach(client => {
