@@ -58,14 +58,13 @@ export const GamePlayStockCard = ({
   };
 
   return (
-    <div className="relative flex flex-col items-start px-4 py-2 w-44 h-59 bg-main-yellow-300 border-2 xl:border-5 border-main-brown-450 rounded-xl">
+    <div className="relative flex flex-col items-start px-4 pt-2 pb-1 w-44 h-59 bg-main-yellow-300 border-[0.19rem] border-main-brown-450 rounded-xl">
       <img
         src={stockImage}
         alt={name}
         className="self-center min-w-0 h-14 object-contain mt-4 mb-1"
       />
-      <h4 className="mb-0.5 text-main-brown-575 text-[0.7rem] font-bold self-center">
-        {" "}
+      <h4 className="mb-1 text-main-brown-575 text-[0.7rem] font-bold self-center">
         {name}
       </h4>
       <p className="mb-1 text-main-brown-575 text-[0.55rem] font-bold ">
@@ -95,7 +94,7 @@ export const GamePlayStockCard = ({
             : ""}
         </span>
       </div>
-      <div className="flex items-center gap-x-0.5">
+      <div className="flex items-center gap-x-0.5 mb-0.5">
         <img
           src={IMAGE_URLS.investing_game.little_pig.little_pig_box}
           alt="물건"
@@ -145,7 +144,7 @@ export const GamePlayStockCard = ({
       <div className="absolute top-1.5 right-2 px-1.5 py-0.5 bg-black/20 rounded-md text-[0.45rem] font-bold text-white">
         {riskType}
       </div>
-      <div className="absolute top-6 right-3 flex items-center">
+      {/* <div className="absolute top-6 right-3 flex items-center">
         <img
           src={IMAGE_URLS.investing_game.little_pig.little_pig_bulb}
           alt="전구"
@@ -154,7 +153,7 @@ export const GamePlayStockCard = ({
         <span className="-ml-0.5 text-main-yellow-400 text-[0.4rem] font-bold">
           힌트
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };
