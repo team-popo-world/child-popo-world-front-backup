@@ -24,7 +24,7 @@ export const PointModal = ({ title, text, price, isOpen, onConfirm, onClose }: P
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="relative flex flex-col items-center w-[22rem] min-h-[16rem] py-6 px-5 bg-gradient-to-b from-[#FFF6D5] to-[#FFE8B5] border-4 border-[#FEA95E] rounded-2xl shadow-lg"
+        className="relative flex flex-col items-center w-[22rem] min-h-[16rem] py-6 px-5 bg-gradient-to-b from-[#FFF6D5] to-[#FFE8B5] border-[0.25rem] border-[#FEA95E] rounded-2xl shadow-lg"
       >
         <motion.img
           initial={{ x: -20, opacity: 0 }}

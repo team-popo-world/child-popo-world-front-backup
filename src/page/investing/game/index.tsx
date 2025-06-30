@@ -157,7 +157,6 @@ export default function InvestingGame() {
   const { name: userName } = useAuthStore();
   // 소리 
   const { isMuted, audio } = useSoundStore();
-  // 포인트
   // 게임 데이터를 저장할 state
   const [gameData, setGameData] = useState<any>(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -356,11 +355,6 @@ export default function InvestingGame() {
     useEndGameMutation.mutate({ sessionId, chapterId: INITIAL_CHAPTER_DATA[gametype].id, isSuccess: false, profitValue: 0 });
   };
 
-  // 예시
-  // http://localhost:5173/investing/game/little-pig?stage=game-start
-  // http://localhost:5173/investing/game/little-pig?stage=game-start
-
-  // 게임 타입에 따라 템플릿 렌더링
   switch (gameStage) {
     case "game-start":
       return <GameStartTemplate

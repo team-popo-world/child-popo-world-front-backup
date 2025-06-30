@@ -156,11 +156,12 @@ const IMAGE_URLS = {
       ninja_bg:
         "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1750318032/ninja_bg_uqcua9",
       ninja1:
-        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja1_wrrxcv",
+        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja3_nybk2b",
       ninja2:
         "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja2_tbpzzb",
       ninja3:
-        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja3_nybk2b",
+        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/ninja1_wrrxcv",
+
     },
     masic: {
       masic_bg:
@@ -283,20 +284,6 @@ const IMAGE_URLS = {
   }
 
 };
-
-// import MainBackgroundMusic from "@/assets/sound/main.mp3";
-// import LittlePigSound from "@/assets/sound/chapter_1.mp3";
-// import TruckSound from "@/assets/sound/chapter_2.mp3";
-// import MasicSound from "@/assets/sound/chapter_3.mp3";
-// import NinjaSound from "@/assets/sound/chapter_4.mp3";
-
-// const SOUND_URLS = {
-//   main: MainBackgroundMusic,
-//   little_pig: LittlePigSound,
-//   truck: TruckSound,
-//   masic: MasicSound,
-//   ninja: NinjaSound,
-// };
 
 export { BACKGROUND_SIZE, INVESTING_GAME_INITIAL_POINT, IMAGE_URLS };
 

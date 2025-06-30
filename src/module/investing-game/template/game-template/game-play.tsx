@@ -150,7 +150,7 @@ export const GamePlay = ({
       {/* 음소거 버튼 */}
       <SoundButton />
 
-      <div className="self-end mt-4 mr-6 mb-1">
+      <div className="self-end mt-3 mr-6 mb-1">
         <MemoizedTextWithStroke
           text={`${gameState.turn}턴 / ${gameState.turnMax}턴`}
           textClassName="text-main-yellow-200 text-[1rem] font-bold"
@@ -224,7 +224,7 @@ export const GamePlay = ({
           playButtonSound(ClickSound);
           setIsTurnFinishModalOpen(true);
         }}
-        className="self-end mx-2 my-1 px-4 py-0.5 font-bold bg-main-yellow-350 border-2 xl:border-5 border-main-brown-400 rounded-lg active:scale-95 transition-all duration-100"
+        className="self-end mx-2 my-1 px-4 py-0.5 font-bold bg-main-yellow-350 border-[0.19rem] border-main-brown-400 rounded-lg active:scale-95 transition-all duration-100"
       >
         턴 종료!
       </button>

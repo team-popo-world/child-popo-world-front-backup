@@ -181,12 +181,12 @@ export const GameStartTemplate = ({ gameType, point, handleGameOut }: GameStartT
         과연 당신은 최고의 달빛 도둑이 될 수 있을까요?`}
           descriptions={[
             {
-              image: IMAGE_URLS.investing_game.ninja.ninja1,
-              label: "달빛 가루",
+              image: IMAGE_URLS.investing_game.ninja.ninja3,
+              label: "달빛 방패",
               descriptions: [
-                "가장 조용하고 안전한 작전이에요.",
-                "큰 변화는 없지만 꾸준히 돈을 벌 수 있어요.",
-                "들킬 위험은 거의 없어요!",
+                "왕실의 보물창고 깊숙이 숨겨진 전설의 방패예요.",
+                "훔치기 어렵고 위험하지만, 성공하면 엄청난 돈을 벌 수 있어요.",
+                "대담한 도둑만이 이 작전에 도전할 수 있어요",
               ],
             },
             {
@@ -199,12 +199,12 @@ export const GameStartTemplate = ({ gameType, point, handleGameOut }: GameStartT
               ],
             },
             {
-              image: IMAGE_URLS.investing_game.ninja.ninja3,
-              label: "달빛 방패",
+              image: IMAGE_URLS.investing_game.ninja.ninja1,
+              label: "달빛 가루",
               descriptions: [
-                "왕실의 보물창고 깊숙이 숨겨진 전설의 방패예요.",
-                "훔치기 어렵고 위험하지만, 성공하면 엄청난 돈을 벌 수 있어요.",
-                "대담한 도둑만이 이 작전에 도전할 수 있어요",
+                "가장 조용하고 안전한 작전이에요.",
+                "큰 변화는 없지만 꾸준히 돈을 벌 수 있어요.",
+                "들킬 위험은 거의 없어요!",
               ],
             },
           ]}

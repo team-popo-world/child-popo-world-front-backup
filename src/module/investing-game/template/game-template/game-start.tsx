@@ -170,7 +170,7 @@ export const GameStart = ({
       </section>
       {/* 버튼 */}
       <button
-        className="px-6 py-2 border-3 xl:border-5 rounded-lg active:scale-95 transition-all duration-100"
+        className="px-6 py-2 border-[0.2rem] rounded-lg active:scale-95 transition-all duration-100"
         style={{ backgroundColor: startButtonBgColor, borderColor: startButtonStrokeColor }}
         onClick={() => {
           setIsGameStartModalOpen(true);

@@ -64,7 +64,7 @@ export function AttandanceTemplate({
           <Modal
             isOpen={isAlreadyAttended}
           >
-            <div className="relative flex flex-col gap-y-1 justify-center items-center w-[14rem] h-[6rem] bg-[#FFF6D5] border-4 border-[#FEA95E] rounded-2xl shadow-lg">
+            <div className="relative flex flex-col gap-y-1 justify-center items-center w-[14rem] h-[6rem] bg-[#FFF6D5] border-[0.25rem] border-[#FEA95E] rounded-2xl shadow-lg">
               <div className="text-lg text-[#6E532C] font-bold text-center">이미 출석했어요!</div>  
               <button className="px-6 py-0.5 text-center rounded-lg bg-[#EE9223] text-white text-base font-bold shadow-md hover:shadow-lg active:scale-95 transition-all duration-200"
                 onClick={() => {
