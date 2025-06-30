@@ -145,6 +145,7 @@ export default function QuestDetail() {
     if(modalMessage == "수락하기") {
       postPushMessage(`${userName}님이 퀘스트를 수락했어요!`);
     }
+
     // 수락하기, 다 했어요 눌렀을 경우 모달창 띄우기, 상태변경
     if (modalMessage) {
       setModalText(modalMessage);
@@ -171,6 +172,20 @@ export default function QuestDetail() {
 
     try {
       await postQuestState(questId, childId, serverState); 
+
+      // 다 했어요 눌렀을 경우 푸시 알림 전송
+      if (state == "다 했어요") {
+        postPushMessage(`${userName}님이 퀘스트를 완료했어요!`);
+      }
+      // 수락하기 눌렀을 경우 푸시 알림 전송
+      if (state == "수락하기") {
+        postPushMessage(`${userName}님이 퀘스트를 수락했어요!`);
+      }
+      // 돈 받기 눌렀을 경우 푸시 알림 전송
+      if (state == "돈 받기") {
+        postPushMessage(`${userName}님이 퀘스트 보상을 받았어요!`);
+      }
+      
       queryClient.invalidateQueries({ queryKey: ["quest"], refetchType: "all" });
 
       const nextState = nextStateMap[state];

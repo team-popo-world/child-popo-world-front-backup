@@ -6,28 +6,29 @@ import { playButtonSound, playSound } from "@/lib/utils/sound";
 import { getStoreItems, type StoreItem } from "@/lib/api/market/getStore";
 import { buyProduct } from "@/lib/api/market/buyProduct";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import ParentShopTTS from "@/assets/sound/pageSound/parent_shop_tts.wav"
+import ParentShopTTS1 from "@/assets/sound/pageSound/parent_shop_tts.wav"
+import ParentShopTTS2 from "@/assets/sound/pageSound/parent_shop_noProduct.wav"
 import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 export const TEXT_MESSAGE = {
   not_product: {
-    text: "아직 상품이 없어요. \n 다음에 찾아주세요!",
+    text: "아직 준비 중이야~~ \n 엄마가 곧 예쁜 선물 넣어줄게!",
     buttonText: "",
   },
   first_and_last: {
-    text: "상점을 구경해봐요!",
+    text: "엄마가 준비한 선물 보러 왔구나\n 마음껏 골라봐~",
     buttonText: "",
   },
   first: {
-    text: "더 많은 상품을 보고 싶나요?",
+    text: "엄마가 준비한 선물 보러 왔구나\n 마음껏 골라봐~",
     buttonText: "더보기",
   },
   middle: {
-    text: "좋은 물건 많죠? \n 다음 것도 볼래요?",
+    text: "엄마가 준비한 선물 보러 왔구나\n 마음껏 골라봐~",
     buttonText: "더보기",
   },
   last: {
-    text: "이제 마지막이에요. 처음부터 \n 보고싶으면 여기를 눌러요!",
+    text: "이제 마지막이야 !",
     buttonText: "처음으로",
   },
 };
@@ -48,8 +49,13 @@ export default function NpcShop() {
   });
 
   useEffect(() => {
-    playSound(ParentShopTTS , 1);
-  }, []);
+    console.log("storeItems",storeItems)
+    if(storeItems?.length === 0) {
+      playSound(ParentShopTTS2 , 1);
+    } else {
+      playSound(ParentShopTTS1 , 1);
+    }
+  }, [storeItems]);
 
   const purchaseMutation = useMutation({
     mutationFn: (productId: string) => buyProduct({ productId, amount: 1}),

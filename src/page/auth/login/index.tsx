@@ -10,6 +10,7 @@ import { loginUser } from "@/lib/api/auth/login";
 import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
 import { subscribe } from "@/lib/utils/pushNotification";
+import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
@@ -36,9 +37,10 @@ export default function LoginPage() {
   }, []);
 
   useEffect(() => {
-    const handleSubscribe = async () => {
+    const handleSubscribeAndTutorialCheck= async () => {
       if (accessToken) {
         try{
+          await tutorialComplete();
           await subscribe();
           if (isAuthenticated) {
             navigate("/");
@@ -48,7 +50,7 @@ export default function LoginPage() {
         }
       }
     };
-    handleSubscribe();
+    handleSubscribeAndTutorialCheck();
   }, [accessToken, isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +65,7 @@ export default function LoginPage() {
       // 액세스 토큰 저장
       setAccessToken(result.accessToken);
       // 사용자 정보 저장
-      setLoginState(result.data.name, result.data.point, form.email);
+      setLoginState(result.data.name, result.data.point, form.email, result.data.tutorialCompleted);
       // 쿼리 캐시 초기화
       queryClient.clear();
       // 메인 페이지로 이동

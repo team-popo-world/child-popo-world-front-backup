@@ -27,12 +27,10 @@ const ISLAND_POSITIONS = {
 
 export default function Main() {
   const { logout } = useAuthStore();
-  const { toggleMute, isMuted, audio } = useSoundStore();
+  const { isMuted, audio } = useSoundStore();
   const { isTutorialCompleted } = useTutorialStore();
   const queryClient = useQueryClient();
   
-  // 로그인 후 메인페이지에서 푸시 알림 구독 
-
 
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
@@ -48,7 +46,7 @@ export default function Main() {
       audio.play();
     }
   }, [isMuted, audio]);
-
+  
   const [isAnimating, setIsAnimating] = useState(false);
   const [targetPosition, setTargetPosition] = useState<{
     top: string;
@@ -59,7 +57,7 @@ export default function Main() {
   });
   const [targetPath, setTargetPath] = useState<string>("");
   const [direction, setDirection] = useState<"left" | "right">("left");
-
+  
   const navigate = useNavigate();
 
   preload(IMAGE_URLS.attandance.circle_popo, { as: "image" });
