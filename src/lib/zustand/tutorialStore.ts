@@ -18,7 +18,7 @@ export const useTutorialStore = create<TutorialState>()(
         const { currentStep } = get();
         set({ currentStep: currentStep + 1 });
       },
-      isTutorialCompleted: false,
+      isTutorialCompleted: true,
       setTutorialCompleted: (completed: boolean) => set({ isTutorialCompleted: completed }),
     }),
     {
