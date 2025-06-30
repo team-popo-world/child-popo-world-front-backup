@@ -125,7 +125,7 @@ export default function QuizPlayPage() {
     if (!level) return;
     if (!point) return;
     const pointPerQuestion =
-      level === "hard" ? 300 : level === "normal" ? 200 : 100;
+      level === "hard" ? 300 : level === "medium" ? 200 : 100;
 
     const reward = correctCount * pointPerQuestion;
     setPoint(point + reward);

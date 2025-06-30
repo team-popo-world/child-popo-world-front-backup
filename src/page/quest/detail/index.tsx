@@ -52,10 +52,12 @@ export default function QuestDetail() {
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalText, setModalText] = useState<string>("");
+  const { point } = useAuthStore();
   const [pendingChange, setPendingChange] = useState<{
     questId: string;
     childId: string;
     state: Quest["state"];
+    reward: number;
   } | null>(null);
 
   const { setPoint } = useAuthStore();
@@ -79,11 +81,8 @@ export default function QuestDetail() {
   });
 
   useEffect(() => {
-    if(isLoading || error) return;
+    if(!responseQuestData || isLoading || error) return;
 
-    // 데이터 동기화 
-    setPoint(responseQuestData.currentPoint);
-    
     // 받은 퀘스트 데이터 객체에 {KEY, VALUE} 추가 (state: "수락하기" 등) 
     const mapped = responseQuestData.quests.map((item: any) => ({
       ...item,
@@ -93,7 +92,7 @@ export default function QuestDetail() {
     // 매핑된 객체 정렬 (각 상태를 인덱스 순서대로 오름차순 정렬)
     const sorted = sortQuests(mapped);
     setQuestData(sorted);
-  }, [responseQuestData]);
+  }, [responseQuestData, isLoading, error]);
 
   // 퀘스트 정렬하기
   const sortQuests = (quests: Quest[]) => {
@@ -136,6 +135,9 @@ export default function QuestDetail() {
     playButtonSound();
     const modalMessage = MatchModalText[state];
 
+    const quest = questData.find((q) => q.quest_id === questId);
+    const reward = quest?.reward || 0;
+
     // 다 했어요 눌렀을 경우 푸시 알림 전송
     if (modalMessage == "다 했어요") {
       postPushMessage(`${userName}님이 퀘스트를 완료했어요!`);
@@ -147,10 +149,10 @@ export default function QuestDetail() {
     if (modalMessage) {
       setModalText(modalMessage);
       setIsModalOpen(true);
-      setPendingChange({ questId, childId, state });
+      setPendingChange({ questId, childId, state,reward });
     } else {
       // 완료 버튼 클릭시 모달창 없이 바로 상태 변경
-      proceedChangeState(questId, childId, state);
+      proceedChangeState(questId, childId, state,reward);
     }
   };
 
@@ -158,7 +160,8 @@ export default function QuestDetail() {
   const proceedChangeState = async (
     questId: string,
     childId: string,
-    state: Quest["state"]
+    state: Quest["state"],
+    reward: number,
   ) => {
     const serverState = serverQuestStateMap[state];
     if (!serverState) return;
@@ -177,8 +180,9 @@ export default function QuestDetail() {
         prev.map((quest) => (quest.quest_id === questId ? { ...quest, state: nextState } : quest))
       );
 
-      // reward 저장
-      console.log(state);
+      if (state === "돈 받기" && reward > 0) {
+        setPoint((point??0) + reward);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -190,7 +194,8 @@ export default function QuestDetail() {
       proceedChangeState(
         pendingChange.questId,
         pendingChange.childId,
-        pendingChange.state
+        pendingChange.state,
+        pendingChange.reward
       );
     }
     playButtonSound();
