@@ -490,10 +490,10 @@ export const GameEnd = ({
 
           {/* 버튼 */}
         </div>
-        <Link to="/" className="self-end mr-3" onClick={() => playButtonSound(ClickSound)}>
+        <Link to="/investing" className="self-end mr-3" onClick={() => playButtonSound(ClickSound)}>
           <div className="flex items-center justify-center gap-x-2">
             <div className="bg-main-yellow-500 text-main-brown-900 text-sm font-bold px-3 py-1.5 rounded-lg active:scale-95 transition-all duration-100">
-              메인으로!
+              돌아가기!
             </div>
           </div>
         </Link>

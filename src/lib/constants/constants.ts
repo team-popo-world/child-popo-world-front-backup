@@ -61,18 +61,18 @@ const IMAGE_URLS = {
       "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1749833259/main-investing_wtfhom",
   },
   market: {
-    bg: "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/market_bg_j6qlx5",
+    bg: "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1751255245/market-bg_suy6d9",
     popo: "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/market_popo_lr9sm4",
     npc_shop:
-      "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/market_npc_shop_jn4mox",
+      "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1751249741/market-npc_qqtpg1",
     npc_shop_bg:
       "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/npc_shop_bg_twcppj",
     inventory:
-      "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/market_inventory_l4fukp",
+      "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1751258482/market-invento_ylzjgh",
     inventory_bg:
       "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/inventory_bg_mpmlen",
     parent_shop:
-      "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/market_parent_shop_oq0kvo",
+      "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1751263965/market-parent_xo4qta",
     parent_shop_bg:
       "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749349063/parent_shop_bg_el0my1",
     wood_title:
@@ -144,7 +144,7 @@ const IMAGE_URLS = {
     },
     truck: {
       truck_bg:
-        "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1750318032/truck_bg_ibydrj",
+        "https://res.cloudinary.com/dgmbxvpv9/image/upload/f_auto,q_auto/v1751261320/investing-truck_rppafp",
       taco_truck:
         "https://res.cloudinary.com/djmcg7zgu/image/upload/f_auto,q_auto/v1749913467/taco_truck_i7bcbo",
       sandwich_truck:

@@ -16,7 +16,7 @@ const INITIAL_POSITION = {
 
 // 포니 목표 위치
 const TARGET_POSITION = {
-  right: { top: "18rem", left: "2rem" },
+  right: { top: "20rem", left: "2rem" },
   left: { top: "19rem", left: "-1rem" },
 };
 
@@ -53,38 +53,42 @@ export const MarketTemplate = ({
           onAnimationComplete={handleAnimationComplete}
         />
       )}
+
       {/* 제목 */}
-      <div className="absolute top-2 left-1/2 -translate-x-1/2">
+      <div className=" top-6  flex justify-center items-center mt-6">
+        <div className="shadow-md px-5 rounded-2xl bg-[#ffda46e2]">
         <TextWithStroke
-          text="포포 시장"
-          textClassName="text-main-yellow-450 text-[3.25rem] font-bold"
-          strokeClassName="text-main-black-500 text-[3.25rem] font-bold text-stroke-width-[0.3rem] text-stroke-color-main-black-500"
+            text="포포 시장"
+            className="mt-[0.1rem] "
+          textClassName="text-main-red-500 text-[2.8rem] font-semibold"
+          strokeClassName="text-main-yellow-300 text-[2.8rem] font-semibold   text-stroke-width-[0.25rem] text-stroke-color-main-black-500"
         />
+</div>
       </div>
 
       {/* npc 상점 */}
       <Link to="/market/npc" onClick={() => playButtonSound()}  >
-        <div className="flex flex-col items-center justify-center absolute top-28 left-48 active:scale-95 transition-all duration-100">
-          <img src={IMAGE_URLS.market.npc_shop} alt="npc_shop" className="w-32 h-32 object-contain" />
-          <div className="px-4 text-[0.6rem] py-[2px] -ml-5 -mt-0.5 font-bold text-[#5C3600] bg-[#F6D8B8] border md:border-3 border-[#97774A] rounded-lg ">
+        <div className="flex flex-col items-center justify-center absolute top-[8.5rem] left-[11rem] ">
+          <img src={IMAGE_URLS.market.npc_shop} alt="npc_shop" className="w-38 object-contain" />
+          <div className="px-[1rem] text-[0.8rem] py-[2px] -ml-3 -mt-3 font-bold text-[#5C3600] bg-[#ffe46a] border-[0.14rem] border-[#fc9a18] rounded-lg ">
             NPC 상점
           </div>
         </div>
       </Link>
       {/* 포포 창고 */}
       <Link to="/market/inventory" onClick={() => playButtonSound()}>
-        <div className="flex flex-col items-center justify-center absolute top-74 left-86 active:scale-95 transition-all duration-100">
-          <img src={IMAGE_URLS.market.inventory} alt="inventory" className="w-24 h-24 object-contain " />
-          <div className="px-5 text-[0.6rem] py-[2px] -mt-0.5 font-bold text-[#5C3600] bg-[#F6D8B8] border md:border-3 border-[#97784A] rounded-lg ">
+        <div className="flex flex-col items-center justify-center absolute bottom-[0.8em] right-[10rem]">
+          <img src={IMAGE_URLS.market.inventory} alt="inventory" className="w-[8.3rem] object-contain " />
+          <div className="px-[1rem] text-[0.8rem] py-[2px] mt-[-1rem] font-bold text-[#5C3600] bg-[#F6D8B8] border-[0.14rem] border-[#97784A] rounded-lg ">
             창고
           </div>
         </div>
       </Link>
       {/* 부모님 상점 */}
       <Link to="/market/parent" onClick={() => playButtonSound()}>
-        <div className="flex flex-col items-center justify-center absolute top-45 left-105 active:scale-95 transition-all duration-100">
-          <img src={IMAGE_URLS.market.parent_shop} alt="parent_shop" className="w-24 h-24 object-contain" />
-          <div className="px-4 text-[0.6rem] py-[2px] -mt-0.5 font-bold text-[#5C3600] bg-[#F6D8B8] border md:border-3 border-[#97784A] rounded-lg ">
+        <div className="flex flex-col items-center justify-center absolute top-[9.8rem] right-[4.4rem] ">
+          <img src={IMAGE_URLS.market.parent_shop} alt="parent_shop" className="w-[8.4rem] object-contain" />
+          <div className="px-[0.8rem] text-[0.8rem] py-[2px] mt-[-0.65rem] font-bold text-[#5C3600] bg-[#f2f7fe] border-[0.14rem] border-[#233e5b] rounded-lg ">
             부모님 상점
           </div>
         </div>
