@@ -55,7 +55,13 @@ export default function NpcShop() {
     } else {
       playSound(ParentShopTTS1 , 1);
     }
-  }, [storeItems]);
+    
+    // 아이템이 사라져서 현재 페이지가 유효하지 않으면 첫 페이지로 이동
+    const newLastIndex = Math.ceil((storeItems?.length || 0) / 3) - 1;
+    if (productIndex > newLastIndex && newLastIndex >= 0) {
+      setProductIndex(0);
+    }
+  }, [storeItems, productIndex]);
 
   const purchaseMutation = useMutation({
     mutationFn: (productId: string) => buyProduct({ productId, amount: 1}),
@@ -92,7 +98,7 @@ export default function NpcShop() {
 
   useEffect(() => {
     setCurrentMessage(getMessage());
-  }, [storeItems]);
+  }, [storeItems, productIndex, lastIndex]);
 
   const handleSpeechBubbleClick = () => {
     playButtonSound();
@@ -129,6 +135,10 @@ export default function NpcShop() {
     playButtonSound();
     setIsCompleteOpen(false);
     setIsPurchaseModalOpen(false);
+    setSelectedProduct(null);
+    
+    // 구매 완료 후 첫 페이지로 이동
+    // setProductIndex(0);
   };
 
   return (
