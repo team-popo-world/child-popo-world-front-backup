@@ -12,7 +12,7 @@ import { setNewAudio, stopBackgroundMusic } from "@/lib/utils/sound";
 import { useSoundStore } from "@/lib/zustand/soundStore";
 import LittlePigSound from "@/assets/sound/chapter1.mp3";
 import TruckSound from "@/assets/sound/chapter2.mp3";
-import MasicSound from "@/assets/sound/chapter3.mp3";
+import MasicSound from "@/assets/sound/chapter3_2.mp3";
 import NinjaSound from "@/assets/sound/chapter4.mp3";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

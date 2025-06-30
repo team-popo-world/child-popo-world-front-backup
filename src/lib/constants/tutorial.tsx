@@ -2,7 +2,8 @@ import tutorial_start from "@/assets/sound/tutorial/tutorial_start.wav"
 import tutorial_sound from "@/assets/sound/tutorial/tutorial_sound.wav"
 import tutorial_attandance1 from "@/assets/sound/tutorial/tutorial_attandance1.wav"
 import tutorial_attandance2 from "@/assets/sound/tutorial/tutorial_attandance2.wav"
-import tutoral_quiz from "@/assets/sound/tutorial/tutorial_quiz1.wav"
+import tutoral_quiz1 from "@/assets/sound/tutorial/tutorial_quiz1.wav"
+import tutoral_quiz2 from "@/assets/sound/tutorial/tutorial_quiz2.wav"
 import tutorial_last1 from "@/assets/sound/tutorial/tutorial_last1.wav"
 import { IMAGE_URLS } from "@/lib/constants/constants";
 
@@ -50,7 +51,7 @@ export const tutorialOrder: Record<string, {text: React.ReactNode, sound: string
         <div className="absolute top-8 left-3 whitespace-nowrap">할수있는 버튼이야!</div>
         <div className="absolute top-12.5 -left-2 whitespace-nowrap">문제 맞히면 포인트가 짠~!</div>
     </div>,
-    sound: tutoral_quiz
+    sound: tutoral_quiz1
     },
 
     // currentStep 7
@@ -82,6 +83,6 @@ export const tutorialAttandance: Record<string, {text: React.ReactNode, sound: s
       <div className="absolute top-6 left-0 whitespace-nowrap">퀴즈 풀기버튼을 누르고</div>
       <div className="absolute top-11 left-4.5 whitespace-nowrap">포인트를 받아봐!</div>
     </div>,
-    sound: tutoral_quiz
+    sound: tutoral_quiz2
     },
   }

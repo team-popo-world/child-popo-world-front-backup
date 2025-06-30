@@ -11,6 +11,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   name: string;
   point: number;
+  tutorialCompleted: boolean;
 }
 
 // 로그인 결과 타입
@@ -45,7 +46,7 @@ export const loginUser = async (loginData: LoginRequest): Promise<LoginResult> =
       success: true,
       data: response.data,
       accessToken,
-      refreshToken
+      refreshToken,
     };
   } catch (error: any) {
     console.error("로그인 에러:", error);

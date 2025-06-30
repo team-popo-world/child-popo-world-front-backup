@@ -27,6 +27,7 @@ import LoginPage from "./page/auth/login";
 import RegisterPage from "./page/auth/register";
 import { BrowserRouter } from "react-router-dom";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
+
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,15 +40,6 @@ const queryClient = new QueryClient({
 
 function App() {
   const { currentStep, setTutorialCompleted } = useTutorialStore();
-  // 1. 핸드폰 기기에서 알림 권한 요청
-  // 2. 서버에서 공개키 받음
-  // 3. 공개키로 구독 정보 생성
-  // 4. 구독 정보를 서버로 보냄
-  // 5. 서버에서 푸시 메시지 전송
-  // 6. 푸시 메시지 수신
-  // 7. 푸시 메시지 표시
-  // 8. 푸시 메시지 클릭 시 앱 실행
-  // 9. 푸시 메시지 삭제
 
   useEffect(() => {
     if(currentStep != 1) {
@@ -62,7 +54,7 @@ function App() {
           <Route path="/" element={<ProtectedRouter />}>
             <Route element={<PushNotificationProvider queryClient={queryClient} />}>
               <Route index element={<Main />} />
-              {/* 투자 */}
+              {/* 모의투자 게임*/}
               <Route path="/investing">
                 <Route index element={<Investing />} />
                 <Route path="game/:gametype" element={<InvestingGame />} />
