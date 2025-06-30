@@ -1,6 +1,6 @@
 import { Background } from "../../../components/layout/Background";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../../styles/toast.css";
@@ -9,17 +9,30 @@ import { IMAGE_URLS } from "@/lib/constants/constants";
 import { login } from "@/lib/api/auth/login";
 import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
+import { subscribe } from "@/lib/utils/pushNotification";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
   const navigate = useNavigate();
-  const { login: setLoginState, setAccessToken } = useAuthStore();
+  const { login: setLoginState, setAccessToken, accessToken, isAuthenticated } = useAuthStore();
   const queryClient = useQueryClient();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    const handleSubscribe = async () => {
+      if (accessToken) {
+        await subscribe();
+      }
+    };
+    handleSubscribe();
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [accessToken]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,13 +42,12 @@ export default function LoginPage() {
     }
 
     const result = await login(form);
-
     if (result.success && result.data && result.accessToken) {
       // 액세스 토큰 저장
       setAccessToken(result.accessToken);
       // 사용자 정보 저장
       setLoginState(result.data.name, result.data.point, form.email);
-      // 로컬 스토리지 초기화
+      // 쿼리 캐시 초기화
       queryClient.clear();
       // 메인 페이지로 이동
       navigate("/");

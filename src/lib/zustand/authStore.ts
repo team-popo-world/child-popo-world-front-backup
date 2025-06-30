@@ -8,7 +8,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import Cookies from "js-cookie";
 import { useTutorialStore } from "./tutorialStore";
-
+import { logoutUser } from "@/lib/api/user/logoutUser";
 /**
  * 인증 상태의 타입 정의
  * @property {boolean} isAuthenticated - 사용자의 인증 여부
@@ -57,7 +57,7 @@ const INITIAL_AUTH_STATE: AuthState = {
  */
 export const useAuthStore = create<AuthStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       ...INITIAL_AUTH_STATE,
       // 사용자 정보 설정 액션
       setUserName: (name) =>
@@ -77,9 +77,14 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       // 로그아웃 액션
-      logout: () => {
+      logout: async () => {
+        const { email } = get();
+        console.log("email", email);
+        if (email) await logoutUser(email);
+        console.log("logoutUser");
         Cookies.remove("refreshToken");
         set(INITIAL_AUTH_STATE);
+        console.log(email);
         // 튜토리얼 스토어 초기화
         localStorage.removeItem('tutorial-storage');
       },

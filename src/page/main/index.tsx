@@ -32,9 +32,7 @@ export default function Main() {
   const queryClient = useQueryClient();
   
   // 로그인 후 메인페이지에서 푸시 알림 구독 
-  useEffect(() => {
-    subscribe();
-  }, []);
+
 
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
