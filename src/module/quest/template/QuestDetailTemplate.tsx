@@ -71,7 +71,7 @@ export const QuestDetailTemplate = ({
       {/* 사운드 */}
       <SoundButton />
       {/* 이름, 포인트 정보 */}
-      <NameAndPoint position={{ top: "0.9rem", right: "1.4rem" }} />
+      <NameAndPoint/>
 
       {/* 포포 이미지 */}
       <img
