@@ -17,7 +17,7 @@ interface ParentShopTemplateProps {
   setIsPurchaseModalOpen: (isOpen: boolean) => void;
   productIndex: number;
   selectedProduct: StoreItem | null;
-  currentMessage: { text: string; buttonText: string };
+  currentMessage?: { text: string; buttonText: string } | null;
   handleSpeechBubbleClick: () => void;
   handleProductClick: (product: StoreItem) => void;
   storeItems: StoreItem[];
@@ -118,8 +118,8 @@ export const ParentShopTemplate = ({
         <DarkWoodTitle title="부모님 상점" />
         {/* 말풍선 */}
         <SpeechBubble
-          text={currentMessage.text}
-          buttonText={currentMessage.buttonText}
+          text={currentMessage?.text || ""}
+          buttonText={currentMessage?.buttonText || ""}
           onClick={() => {
             handleSpeechBubbleClick()
           }}

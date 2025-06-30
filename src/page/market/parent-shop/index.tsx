@@ -41,11 +41,11 @@ export default function NpcShop() {
   const [selectedProduct, setSelectedProduct] = useState<StoreItem | null>(null);
   const [isCompleteOpen, setIsCompleteOpen] = useState(false);
   const [isNoPointModalOpen, setIsNoPointModalOpen] = useState(false);  
+  const [currentMessage, setCurrentMessage] = useState<{text: string, buttonText: string} | null>(null);
   const queryClient = useQueryClient();
   const { data: storeItems } = useQuery({
     queryKey: ["store-items", "parent"],
     queryFn: () => getStoreItems("parent"),
-    staleTime: 0 // 0초 그냥 부모가 상품올렸을떄 바로 반영해야함
   });
 
   useEffect(() => {
@@ -90,14 +90,16 @@ export default function NpcShop() {
     return TEXT_MESSAGE.middle;
   };
 
-  const currentMessage = getMessage();
+  useEffect(() => {
+    setCurrentMessage(getMessage());
+  }, [storeItems]);
 
   const handleSpeechBubbleClick = () => {
     playButtonSound();
-
-    if (currentMessage.buttonText === "더보기") {
+    
+    if (currentMessage?.buttonText === "더보기") {
       setProductIndex((prev) => prev + 1);
-    } else if (currentMessage.buttonText === "처음으로") {
+    } else if (currentMessage?.buttonText === "처음으로") {
       setProductIndex(0);
     }
   };
