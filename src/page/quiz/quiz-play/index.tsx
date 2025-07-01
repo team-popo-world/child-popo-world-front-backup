@@ -8,6 +8,7 @@ import { useAuthStore } from "@/lib/zustand/authStore";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { playButtonSound } from "@/lib/utils/sound";
 import { postPushMessage } from "@/lib/api/push/postPushMessage";
+import { postPoint } from "@/lib/api/quiz/postPoint";
 
 interface Quiz {
   question: string;
@@ -49,6 +50,7 @@ export default function QuizPlayPage() {
       .then((res) => {
         console.log(res)
         const raw = JSON.parse(res.data.questionJson);
+        console.log(raw)
         const parsedQuiz: Quiz[] = [];
 
         const makeQuiz = (
@@ -129,6 +131,7 @@ export default function QuizPlayPage() {
 
     const reward = correctCount * pointPerQuestion;
     setPoint(point + reward);
+    postPoint(reward);
     setReward(reward);
   };
 
