@@ -7,7 +7,6 @@ export const postSubscribe = async (endpoint: string, p256dh: string, auth: stri
       p256dh: p256dh,
       auth: auth,
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

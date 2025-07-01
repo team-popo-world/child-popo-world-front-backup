@@ -9,6 +9,7 @@ export default function TopicSelectPage() {
     const { isTutorialCompleted } = useTutorialStore();
   // 뒤로가기 버튼 클릭
   const handleBack = () => {
+    // 튜토리얼을 완료하지 않았다면 뒤로가기 버튼 클릭 시 홈으로 이동
     if(!isTutorialCompleted) {
       navigate("/");
       return;

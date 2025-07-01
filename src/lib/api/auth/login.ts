@@ -1,6 +1,15 @@
-import apiClient from "../axios";
+import axios from "axios";
 import Cookies from "js-cookie";
+const API_URL = "https://www.toslte.store";
 
+const apiClient = axios.create({
+  baseURL: API_URL,
+  timeout: 5000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 // 로그인 요청 타입 
 export interface LoginRequest {
   email: string;
@@ -25,11 +34,17 @@ export interface LoginResult {
 
 export const loginUser = async (loginData: LoginRequest): Promise<LoginResult> => {
   try {
-    const response = await apiClient.post("/auth/login", loginData);
+    const response = await apiClient.post(`/auth/login`, loginData);
+    console.log("response login", response);
+    if(response.status === 401) {
+      return {
+        success: false,
+        error: "로그인에 실패했습니다.",
+      };
+    }
     console.log("response login", response.data);
     // 액세스 토큰 추출
     const accessToken = response.headers["authorization"]?.replace("Bearer ", "");
-    
     // 리프레시 토큰 추출
     const refreshToken = response.headers["refresh-token"];
 

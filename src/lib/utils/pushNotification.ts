@@ -43,9 +43,6 @@ export const subscribe = async () => {
     if (p256dhKey && authKey) {
       const p256dh = arrayBufferToBase64(p256dhKey);
       const auth = arrayBufferToBase64(authKey);
-      console.log("subscription", subscription.endpoint);
-      console.log("p256dh", p256dh);
-      console.log("auth", auth);
       const response = await postSubscribe(subscription.endpoint, p256dh, auth);
       console.log("구독 완료", response);
     } else {

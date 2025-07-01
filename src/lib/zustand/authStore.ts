@@ -9,7 +9,6 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import Cookies from "js-cookie";
 import { useTutorialStore } from "./tutorialStore";
 import { logoutUser } from "@/lib/api/user/logoutUser";
-import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
 /**
  * 인증 상태의 타입 정의
  * @property {boolean} isAuthenticated - 사용자의 인증 여부
@@ -36,7 +35,7 @@ interface AuthStore extends AuthState {
   setUserName: (name: string | null) => void; // 유저 정보 설정
   setPoint: (point: number | null) => void; // 포인트 설정
   login: (name: string, point: number, email: string, tutorialCompleted: boolean) => void; // 로그인
-  logout: () => void; // 로그아웃
+  logout: (reason?: string) => void; // 로그아웃
 }
 
 /**
@@ -80,9 +79,9 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       // 로그아웃 액션
-      logout: async () => {
+      logout: async (reason?: string) => {
         const { email } = get();
-        if (email) await logoutUser(email);
+        if (email && reason !== "refresh") await logoutUser(email);
         // 리프레쉬 토큰 삭제
         Cookies.remove("refreshToken");
         // 튜토리얼 스토어 초기화

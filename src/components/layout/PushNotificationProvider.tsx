@@ -46,7 +46,6 @@ const PushNotificationProvider = ({ queryClient }: PushNotificationProviderProps
     }
 
     newSubscription();
-    console.log("Push notification listener registered for authenticated user");
 
     // 클린업
     return () => {

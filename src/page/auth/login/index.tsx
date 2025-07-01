@@ -11,6 +11,7 @@ import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
 import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
 import { postPushMessage } from "@/lib/api/push/postPushMessage";
+import { getUser } from "@/lib/api/user/getUser";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
@@ -45,6 +46,7 @@ export default function LoginPage() {
         try{
           await tutorialComplete();
           if (isAuthenticated) {
+            getUser();
             postPushMessage(`${userName}님이 로그인했어요!`);
             navigate("/");
           }
@@ -62,20 +64,25 @@ export default function LoginPage() {
       toast.error("이메일과 비밀번호를 모두 입력해주세요.");
       return;
     }
-
-    const result = await loginUser(form);
-    if (result.success && result.data && result.accessToken) {
-      // 액세스 토큰 저장
-      setAccessToken(result.accessToken);
-      // 사용자 정보 저장
-      setLoginState(result.data.name, result.data.point, form.email, result.data.tutorialCompleted);
-      // 쿼리 캐시 초기화
-      queryClient.clear();
-      // 메인 페이지로 이동
-      navigate("/");
-    } else {
-      toast.error(result.error || "로그인에 실패했습니다.");
+    try{
+      const result = await loginUser(form); 
+      if (result.success && result.data && result.accessToken) {
+        // 액세스 토큰 저장
+        setAccessToken(result.accessToken);
+        // 사용자 정보 저장
+        setLoginState(result.data.name, result.data.point, form.email, result.data.tutorialCompleted);
+        // 쿼리 캐시 초기화
+        queryClient.clear();
+        // 메인 페이지로 이동
+        navigate("/");
+      } else {
+        toast.error(result.error || "로그인에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("로그인 에러:", error);
     }
+    
+
   };
 
   return (
