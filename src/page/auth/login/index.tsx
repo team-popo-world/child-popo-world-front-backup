@@ -10,11 +10,12 @@ import { loginUser } from "@/lib/api/auth/login";
 import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
 import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
   const navigate = useNavigate();
-  const { login: setLoginState, setAccessToken, accessToken, isAuthenticated } = useAuthStore();
+  const { login: setLoginState, setAccessToken, accessToken, isAuthenticated, name: userName } = useAuthStore();
   const queryClient = useQueryClient();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,7 @@ export default function LoginPage() {
         try{
           await tutorialComplete();
           if (isAuthenticated) {
+            postPushMessage(`${userName}님이 로그인했어요!`);
             navigate("/");
           }
         } catch (error) {
