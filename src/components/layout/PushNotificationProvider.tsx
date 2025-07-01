@@ -21,10 +21,6 @@ const PushNotificationProvider = ({ queryClient }: PushNotificationProviderProps
 
 
       if (event.data && event.data.type === "PUSH_NOTIFICATION_RECEIVED") {
-        console.log("event.data", event.data);
-        console.log("event.data.data", event.data.data);
-        queryClient.invalidateQueries({ queryKey: ["user"] });
-
         // 퀘스트 데이터 갱신
         if (event.data.data.includes("퀘스트")) {
           queryClient.invalidateQueries({ queryKey: ["quest"] });
@@ -32,20 +28,9 @@ const PushNotificationProvider = ({ queryClient }: PushNotificationProviderProps
 
         // 상품 데이터 갱신
         if (event.data.data.includes("상품")) {
-          queryClient.invalidateQueries({ queryKey: ["purchase-request"] });
-          queryClient.invalidateQueries({ queryKey: ["purchase-management"] });
-          queryClient.invalidateQueries({ queryKey: ["storeItems"] });
-          queryClient.invalidateQueries({ queryKey: ["productAnalyze"] });
-        }
-
-        // 통장 데이터 갱신
-        if (event.data.data.includes("통장")) {
-          queryClient.invalidateQueries({ queryKey: ["savingsAccounts"] });
-        }
-
-        // 분석데이터 갱신
-        if (event.data.data.includes("게임")) {
-          queryClient.invalidateQueries({ queryKey: ["investAnalyze"] });
+          console.log("상품 데이터 갱신");
+          queryClient.invalidateQueries({ queryKey: ["inventory-items"] });
+          queryClient.invalidateQueries({ queryKey: ["store-items", "parent"] });
         }
       }
     };
