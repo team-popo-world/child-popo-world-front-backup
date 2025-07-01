@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
 import { postPushMessage } from "@/lib/api/push/postPushMessage";
 import { getUser } from "@/lib/api/user/getUser";
+import { ApiError } from "@/lib/api/axios";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginRequest>({ email: "", password: "" });
@@ -79,6 +80,9 @@ export default function LoginPage() {
         toast.error(result.error || "로그인에 실패했습니다.");
       }
     } catch (error) {
+      if(error instanceof ApiError) {
+        toast.error(error.message);
+      }
       console.error("로그인 에러:", error);
     }
     

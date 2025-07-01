@@ -83,12 +83,16 @@ apiClient.interceptors.response.use(
     
     // 토큰 갱신 요청 자체가 실패한 경우 무한 반복 방지
     if (error.config?.url?.includes('/auth/token/refresh')) {
-      Cookies.remove("refreshToken");
       useAuthStore.getState().logout("refresh");
       return Promise.reject(new ApiError(401, "세션이 만료되었습니다. 다시 로그인해주세요."));
     }
 
     const { status } = error.response;
+
+    if (status === 409) {
+      useAuthStore.getState().logout("refresh");
+      return Promise.reject(new ApiError(401, "세션이 만료되었습니다. 다시 로그인해주세요."));
+    }
 
     if (status === 401) {
       try {
@@ -116,7 +120,6 @@ apiClient.interceptors.response.use(
         } else {
           throw new Error("Access token not received from refresh");
         }
-
         const newRefreshToken = response.headers["refresh-token"];
         if(newRefreshToken) {
           Cookies.set("refreshToken", newRefreshToken, {
@@ -133,7 +136,6 @@ apiClient.interceptors.response.use(
         }
       } catch (error: unknown) {
         // refresh 토큰도 만료된 경우 로그아웃
-        Cookies.remove("refreshToken");
         useAuthStore.getState().logout("refresh");
 
         return Promise.reject(new ApiError(401, "세션이 만료되었습니다. 다시 로그인해주세요."));

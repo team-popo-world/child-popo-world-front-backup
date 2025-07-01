@@ -9,6 +9,7 @@ import { BackArrow } from "../../../components/button/BackArrow";
 import { IMAGE_URLS } from "@/lib/constants/constants";
 import { register, validateAge } from "@/lib/api/auth/register";
 import type { RegisterForm } from "@/lib/api/auth/register";
+import { ApiError } from "@/lib/api/axios";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -49,15 +50,22 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const result = await register(form);
-
-    if (result.success) {
-      toast.success("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
-      navigate("/auth/login");
-    } else {
-      toast.error(result.error);
+    try{
+      const result = await register(form);
+      if (result.success) {
+        toast.success("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
+        navigate("/auth/login");
+      } else {
+        toast.error(result.error || "회원가입에 실패했습니다.");
+      }
+    } catch (error) {
+      if(error instanceof ApiError) {
+        toast.error(error.message);
+      }
+      console.error("회원가입 에러:", error);
     }
+
+
   };
 
   return (
