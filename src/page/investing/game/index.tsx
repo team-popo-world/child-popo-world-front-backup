@@ -288,12 +288,11 @@ export default function InvestingGame() {
       // 각 주식별로 턴 데이터 전송, 단순 요청이므로 탄스택 쿼리 일단 안씀 
       postSendTurnData(sessionId, INITIAL_CHAPTER_DATA[gametype].id, gameState.turn, turnData);
     });
-
     // 턴 끝남
     // 만약 게임이 끝났다면 게임 종료 처리
     if (gameState.turn >= gameState.turnMax) {
       const lastPoint =
-        gameState.point + gameState.price.reduce((acc, curr, index) => acc + curr * gameState.count[index], 0);
+        gameState.point + gameState.nextPrice.reduce((acc, curr, index) => acc + curr * gameState.count[index], 0);
       updateGameState({ isGameOver: true });
       // 게임 결과 페이지로 이동
       navigate(`/investing/game/${gametype}?stage=game-end`); 
@@ -374,7 +373,7 @@ export default function InvestingGame() {
       );
     case "game-end":
       const lastPoint =
-        gameState.point + gameState.price.reduce((acc, curr, index) => acc + curr * gameState.count[index], 0);
+        gameState.point + gameState.nextPrice.reduce((acc, curr, index) => acc + curr * gameState.count[index], 0);
       const stockNames = gameState.currentScenario?.stocks.map((stock) => stock.name);
       return (
         <GameEndTemplate
