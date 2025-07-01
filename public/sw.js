@@ -67,5 +67,5 @@ self.addEventListener('notificationclick', function (event) {
     console.log('Notification click received.')  // 알림 클릭 로그 출력
     // 클릭된 알림을 닫음
     event.notification.close()
-    clients.openWindow('/') // 클릭 시 열 URL, 이걸 우리어플로 해야하는건가? 
+    // clients.openWindow('/') // 클릭 시 열 URL,
   })
