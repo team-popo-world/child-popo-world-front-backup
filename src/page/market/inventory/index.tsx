@@ -37,6 +37,7 @@ export default function Inventory() {
   const [isUseModalOpen, setIsUseModalOpen] = useState(false);
   const [productIndex, setProductIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<InventoryItem | null>(null);
+  const [currentMessage, setCurrentMessage] = useState<{ text: string; buttonText: string } | null> (null);
   const queryClient = useQueryClient();
   const { name: userName } = useAuthStore();
   useEffect(() => {
@@ -48,6 +49,14 @@ export default function Inventory() {
     queryKey: ["inventory-items"], 
     queryFn: () => getInventory(),
   })
+
+  useEffect(() => {
+    const newLastIndex = Math.ceil((storeItems?.length || 0) / 9) - 1;
+    if (productIndex > newLastIndex && newLastIndex >= 0) {
+      setProductIndex(0);
+    }
+  }, [productIndex, storeItems?.length]);
+
 
   const useProductMutation = useMutation({
     mutationFn: (productId: string) => useProduct({ productId }), 
@@ -64,7 +73,7 @@ export default function Inventory() {
   })
 
   // 마지막 페이지 인덱스 
-  const lastIndex = Math.ceil((storeItems?.length || 0) / 3) - 1;
+  const lastIndex = Math.ceil((storeItems?.length || 0) / 9) - 1;
 
   const getMessage = () => {
     if (storeItems?.length === 0) {
@@ -82,14 +91,16 @@ export default function Inventory() {
     return TEXT_MESSAGE.middle;
   };
 
-  const currentMessage = getMessage();
-
+  useEffect(() => {
+    setCurrentMessage(getMessage());
+  }, [storeItems, productIndex, lastIndex]);
+  
   const handleSpeechBubbleClick = () => {
     playButtonSound();
     
-    if (currentMessage.buttonText === "더보기") {
+    if (currentMessage?.buttonText === "더보기") {
       setProductIndex((prev) => prev + 1);
-    } else if (currentMessage.buttonText === "처음으로") {
+    } else if (currentMessage?.buttonText === "처음으로") {
       setProductIndex(0);
     }
   };
@@ -124,7 +135,7 @@ export default function Inventory() {
       storeItems={storeItems || []}
       productIndex={productIndex}
       selectedProduct={selectedProduct}
-      currentMessage={currentMessage}
+      currentMessage={currentMessage || TEXT_MESSAGE.not_product}
       handleSpeechBubbleClick={handleSpeechBubbleClick}
       handleProductClick={handleProductClick}
       handleBack={handleBack}
