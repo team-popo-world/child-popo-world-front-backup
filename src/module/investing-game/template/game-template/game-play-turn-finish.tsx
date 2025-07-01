@@ -40,7 +40,7 @@ export const GamePlayTurnFinish = ({
 }: GamePlayTurnFinishProps) => {
   return (
     <BorderModal
-      className="flex flex-col items-start px-10 "
+      className="flex flex-col items-start px-10"
       borderColor={borderColor}
       borderStrokeColor={borderStrokeColor}
       sirenImage={sirenImage}
@@ -54,7 +54,7 @@ export const GamePlayTurnFinish = ({
       </h1>
       <p className={`mb-4 text-[0.75rem] font-bold `}>{result}</p>
 
-      <section className="mb-4 grid grid-cols-3 gap-x-2 w-full">
+      <section className="mb-4 grid grid-cols-3 gap-x-1.5 w-full">
         {stockData.map((stock, index) => (
           <TurnFinishStockCard key={index} {...stock} />
         ))}

@@ -181,7 +181,7 @@ export const GameStartTemplate = ({ gameType, point, handleGameOut }: GameStartT
         과연 당신은 최고의 달빛 도둑이 될 수 있을까요?`}
           descriptions={[
             {
-              image: IMAGE_URLS.investing_game.ninja.ninja3,
+              image: IMAGE_URLS.investing_game.ninja.ninja1,
               label: "달빛 방패",
               descriptions: [
                 "왕실의 보물창고 깊숙이 숨겨진 전설의 방패예요.",
@@ -199,7 +199,7 @@ export const GameStartTemplate = ({ gameType, point, handleGameOut }: GameStartT
               ],
             },
             {
-              image: IMAGE_URLS.investing_game.ninja.ninja1,
+              image: IMAGE_URLS.investing_game.ninja.ninja3,
               label: "달빛 가루",
               descriptions: [
                 "가장 조용하고 안전한 작전이에요.",
@@ -258,9 +258,9 @@ export const GameStartTemplate = ({ gameType, point, handleGameOut }: GameStartT
               image: IMAGE_URLS.investing_game.masic.masic_1,
               label: "마법연구소",
               descriptions: [
-                "사람들이 신나게 구경하는 멋진 공연장이에요.",
-                "날씨가 좋거나 재미있는 일이 생기면 더 인기가 많아지고,",
-                "비가 오거나 바람이 불면 공연이 어려울 수도 있어요.",
+                "신기한 마법을 연구하는 신비한 곳이에요.",
+                "가끔은 엄청난 마법이 성공해서 놀라운 일이 생기기도 하지만,",
+                "실패하면 힘들어질 수도 있어요.",
               ],
             },
             {

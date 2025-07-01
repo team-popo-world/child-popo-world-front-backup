@@ -12,7 +12,7 @@ interface StockCardProps {
 export const TurnFinishStockCard = ({ image, name, priceChange, countChange }: StockCardProps) => {
 
   return (
-    <div className="flex flex-col px-1 items-center">
+    <div className="flex flex-col items-center">
       <img
         src={image}
         alt={name}

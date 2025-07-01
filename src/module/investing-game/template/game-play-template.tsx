@@ -54,8 +54,8 @@ export const GamePlayTemplate = ({
           backgroundImage={IMAGE_URLS.investing_game.truck.truck_bg}
           characterImages={[
             IMAGE_URLS.investing_game.truck.taco_truck,
-            IMAGE_URLS.investing_game.truck.sandwich_truck,
             IMAGE_URLS.investing_game.truck.icecream_truck,
+            IMAGE_URLS.investing_game.truck.sandwich_truck,
           ]}
           titleTextColor="#1D79BA"
           buttonColor="#1D79BA"
