@@ -7,6 +7,7 @@ import { getStoreItems, type StoreItem } from "@/lib/api/market/getStore";
 import { buyProduct } from "@/lib/api/market/buyProduct";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import NpcShopTTS from "@/assets/sound/pageSound/npc_stop_tts.wav"
+import { postPushMessage } from "@/lib/api/push/postPushMessage";
 
 
 export const TEXT_MESSAGE = {
@@ -39,7 +40,7 @@ export default function NpcShop() {
   const [isNoPointModalOpen, setIsNoPointModalOpen] = useState(false);
   const [productIndex, setProductIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<StoreItem | null>(null);
-  const { setPoint, point } = useAuthStore();
+  const { setPoint, point, name: userName } = useAuthStore();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export default function NpcShop() {
 
       // 상점 아이템 캐시 무효화, 모든 캐시 무효화
       queryClient.invalidateQueries({ queryKey: ["inventory-items"], refetchType: "all" });
+      postPushMessage(`${userName}님이 NPC 먹이를 구매했어요!`);
     },
     onError: (error) => {
       console.error("Failed to buy product", error);
