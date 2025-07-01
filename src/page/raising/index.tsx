@@ -12,6 +12,8 @@ import { getFeeds, feedPopo } from "@/lib/api/raising/raising";
 import type { Feed } from "@/lib/api/raising/raising";
 import { ToRasingLandLoading2 } from "@/components/loading/ToRasingLandLoading2";
 import RaisingTTS from "@/assets/sound/pageSound/rasing_tts.wav"
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 // 먹이 이미지 매핑
 const feedImageMap: Record<string, keyof typeof IMAGE_URLS.raising> = {
   "당근": "carrot",
@@ -84,6 +86,7 @@ export default function RaisingPage() {
   const navigate = useNavigate();
   // 배경음악 설정
   const { isMuted, audio } = useSoundStore();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setNewAudio(RaisingBackgroundMusic);
@@ -114,37 +117,43 @@ export default function RaisingPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   // 먹이 목록 조회
-  const fetchFeeds = async () => {
-    try {
-      const { currentLevel, currentExperience, availableFeeds } = await getFeeds();
-      
-      // API 응답과 기본 먹이 목록을 합침
-      const mergedFeeds = ALL_FEEDS.map(defaultFeed => {
-        const apiFeed = availableFeeds.find(feed => feed.productId === defaultFeed.productId);
-        if (apiFeed) {
-          return {
-            ...apiFeed,
-            stock: apiFeed.stock ?? 0  // stock이 undefined나 null이면 0으로 표시
-          };
-        }
-        return defaultFeed;  // API에 없는 먹이는 기본 정보(stock: 0) 사용
-      });
+  const {
+    data: feedData,
+    isError,
+    isLoading: queryLoading,
+    refetch: refetchFeeds
+  } = useQuery({
+    queryKey: ["feeds"],
+    queryFn: getFeeds,
+    select: (data) => ({
+      level: data.currentLevel,
+      exp: data.currentExperience,
+      feeds: ALL_FEEDS.map(defaultFeed => {
+        const apiFeed = data.availableFeeds.find(feed => feed.productId === defaultFeed.productId);
+        return apiFeed ? {
+          ...apiFeed,
+          stock: apiFeed.stock ?? 0
+        } : defaultFeed;
+      })
+    })
+  });
 
-      setLevel(currentLevel);
-      setExp(currentExperience);
-      setFeedList(mergedFeeds);
-    } catch (error) {
-      console.error("먹이 목록 조회 실패:", error);
+  useEffect(() => {
+    if (feedData) {
+      setLevel(feedData.level);
+      setExp(feedData.exp);
+      setFeedList(feedData.feeds);
+    }
+  }, [feedData]);
+
+  // 에러 처리
+  useEffect(() => {
+    if (isError) {
       setLevel(1);
       setExp(0);
-      setFeedList(ALL_FEEDS);  // 에러 시 모든 먹이를 0개로 표시
+      setFeedList(ALL_FEEDS);
     }
-  };
-
-  // 컴포넌트 마운트 시 먹이 목록 조회
-  useEffect(() => {
-    fetchFeeds();
-  }, []);
+  }, [isError]);
 
   function getCharacterImg(level: number) {
     if (level >= 5) return IMAGE_URLS.raising.character5;
@@ -244,7 +253,7 @@ export default function RaisingPage() {
           productId: id,
           amount: 1
         })));
-
+        queryClient.invalidateQueries({ queryKey: ["feeds"] });
         setAddedExp(gainedExperience);
 
         if (didLevelUp) {
@@ -265,7 +274,7 @@ export default function RaisingPage() {
         setSelected([]);
         
         // 먹이 목록 갱신
-        fetchFeeds();
+        refetchFeeds();
       } catch (error: any) {
         console.error("먹이 주기 실패:", error);
         if (error.response?.data?.message) {
@@ -312,7 +321,7 @@ export default function RaisingPage() {
               className="bg-yellow-300 text-[#834400] font-bold px-6 py-1 rounded-xl text-xl shadow cursor-pointer"
               onClick={() => {
                 playButtonSound();
-                fetchFeeds(); // 먹이 주기 버튼 클릭 시 먹이 목록 실시간 조회
+                refetchFeeds(); // 먹이 주기 버튼 클릭 시 먹이 목록 실시간 조회
                 setIsFeedModalOpen(true);
               }}
             >
