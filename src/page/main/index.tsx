@@ -14,6 +14,7 @@ import Tutorial from "@/module/main/template/Tutorial";
 import { useTutorialStore } from "@/lib/zustand/tutorialStore";
 import { subscribe } from "@/lib/utils/pushNotification";
 import { getQuest } from "@/lib/api/quest/getQuest";
+import { getFeeds } from "@/lib/api/raising/raising";
 
 // 섬별 위치 정보
 const ISLAND_POSITIONS = {
@@ -83,7 +84,8 @@ export default function Main() {
         ...Object.values(IMAGE_URLS.investing_game.truck),
         ...Object.values(IMAGE_URLS.investing_game.base),
       ];
-      investingPageImages.forEach((image) => {
+      investingPageImages.forEach((image) => { 
+        
         preload(image, { as: "image" });
       });
       
@@ -108,6 +110,7 @@ export default function Main() {
       raisingPageImages.forEach((image) => {
         preload(image, { as: "image" });
       });
+      queryClient.prefetchQuery({ queryKey: ["feeds"], queryFn: getFeeds });
     }
 
     if (island == "emotionDiary") {
