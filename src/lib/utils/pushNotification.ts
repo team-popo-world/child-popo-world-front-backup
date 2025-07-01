@@ -8,7 +8,7 @@ export const subscribe = async () => {
         navigator.serviceWorker
           .register("/sw.js")
           .then((reg) => {
-            console.log("✅ Service Worker registered:", reg);
+            console.log("✅ Service Worker registered");
           })
           .catch((err) => {
             console.error("❌ Service Worker registration failed:", err);
@@ -44,7 +44,7 @@ export const subscribe = async () => {
       const p256dh = arrayBufferToBase64(p256dhKey);
       const auth = arrayBufferToBase64(authKey);
       const response = await postSubscribe(subscription.endpoint, p256dh, auth);
-      console.log("response, postSubscribe", response);
+      console.log("구독 완료", response);
     } else {
       console.log("p256dh or auth key가 없음");
     }

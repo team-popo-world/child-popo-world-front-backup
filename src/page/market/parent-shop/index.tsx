@@ -49,7 +49,6 @@ export default function NpcShop() {
   });
 
   useEffect(() => {
-    console.log("storeItems",storeItems)
     if(storeItems?.length === 0) {
       playSound(ParentShopTTS2 , 1);
     } else {

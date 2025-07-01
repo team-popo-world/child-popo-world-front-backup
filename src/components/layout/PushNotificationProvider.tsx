@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { QueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/lib/zustand/authStore"
+import { subscribe } from "@/lib/utils/pushNotification";
 interface PushNotificationProviderProps {
   queryClient: QueryClient;
 }
@@ -15,15 +16,13 @@ const PushNotificationProvider = ({ queryClient }: PushNotificationProviderProps
       return;
     }
 
-    // 서비스 워커가 없으면 리스너 등록하지 않음
-    if (!navigator.serviceWorker) {
-      console.log("Service Worker not supported");
-      return;
-    }
-
     // 서비스 워커로부터 메시지 수신
     const handleMessage = (event: MessageEvent) => {
+
+
       if (event.data && event.data.type === "PUSH_NOTIFICATION_RECEIVED") {
+        console.log("event.data", event.data);
+        console.log("event.data.data", event.data.data);
         queryClient.invalidateQueries({ queryKey: ["user"] });
 
         // 퀘스트 데이터 갱신
@@ -52,7 +51,16 @@ const PushNotificationProvider = ({ queryClient }: PushNotificationProviderProps
     };
 
     // 메시지 리스너 등록
-    navigator.serviceWorker.addEventListener("message", handleMessage);
+    const newSubscription = async () => {
+      await subscribe();
+      if (!navigator.serviceWorker) {
+        console.log("Service Worker not supported");
+        return;
+      }
+      navigator.serviceWorker.addEventListener("message", handleMessage);
+    }
+
+    newSubscription();
     console.log("Push notification listener registered for authenticated user");
 
     // 클린업

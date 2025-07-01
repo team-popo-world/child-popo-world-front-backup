@@ -9,7 +9,6 @@ import { IMAGE_URLS } from "@/lib/constants/constants";
 import { loginUser } from "@/lib/api/auth/login";
 import type { LoginRequest } from "@/lib/api/auth/login";
 import { useQueryClient } from "@tanstack/react-query";
-import { subscribe } from "@/lib/utils/pushNotification";
 import { tutorialComplete } from "@/lib/api/auth/tutorialComplete";
 
 export default function LoginPage() {
@@ -33,7 +32,10 @@ export default function LoginPage() {
         return;
       } 
     };
-    handlePermission();
+
+    if(Notification.permission !== "granted") {
+      handlePermission();
+    }
   }, []);
 
   useEffect(() => {
@@ -41,7 +43,6 @@ export default function LoginPage() {
       if (accessToken) {
         try{
           await tutorialComplete();
-          await subscribe();
           if (isAuthenticated) {
             navigate("/");
           }
