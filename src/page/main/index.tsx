@@ -35,7 +35,7 @@ export default function Main() {
 
   // 첫페이지 로드시 배경음악 설정
   useEffect(() => {
-    setNewAudio(MainBackgroundMusic, 0.38);
+    setNewAudio(MainBackgroundMusic, 0.29);
   }, []);
 
   // 음소거 상태 변경시 배경음악 정지 또는 재생

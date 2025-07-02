@@ -36,7 +36,7 @@ export const playSound = (url: string, volume: number = 1,  tutorial: boolean = 
 };
 
 // 배경음악 설정
-export const setNewAudio = (url: string, volume: number = 0.8, loop: boolean = true) => {
+export const setNewAudio = (url: string, volume: number = 0.7, loop: boolean = true) => {
   const { audio, setAudio } = useSoundStore.getState();
   if (audio) {
 

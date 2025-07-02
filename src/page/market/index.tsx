@@ -21,7 +21,7 @@ export default function MarketPage() {
     // 첫페이지 로드시 배경음악 설정
     useEffect(() => {
       if(audio?.name !== MarketBackgroundMusic) {
-        setNewAudio(MarketBackgroundMusic, 0.5);
+        setNewAudio(MarketBackgroundMusic, 0.33);
       }
     }, []);
   

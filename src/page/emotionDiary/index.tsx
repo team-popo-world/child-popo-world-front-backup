@@ -24,7 +24,7 @@ export default function EmotionDiaryPage() {
   });
 
   useEffect(() => {
-    setNewAudio(EmotionDiaryBackgroundMusic, 0.6);
+    setNewAudio(EmotionDiaryBackgroundMusic, 0.25);
     if (from === "main") {
       playSound(EmotionDiaryTTS, 1);
     }

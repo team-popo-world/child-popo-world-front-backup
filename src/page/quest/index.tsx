@@ -15,7 +15,7 @@ export default function QuestPage() {
    // 첫페이지 로드시 배경음악 설정
    useEffect(() => {
     if(audio?.name !== QuestBackgroundMusic) {
-      setNewAudio(QuestBackgroundMusic, 0.4);
+      setNewAudio(QuestBackgroundMusic, 0.35);
     }
     if (from === "main") {
       playSound(QuestTTS, 1);

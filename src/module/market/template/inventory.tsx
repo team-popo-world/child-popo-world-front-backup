@@ -9,6 +9,7 @@ import NameAndPoint from "@/components/user/NameAndPoint";
 import type { InventoryItem } from "@/lib/api/market/getInventory";
 import { TextWithStroke } from "@/components/text/TextWithStroke";
 import SoundButton from "@/components/button/SoundButton";
+import { useEffect } from "react";
 
 interface InventoryTemplateProps {
   isUseModalOpen: boolean;
@@ -26,7 +27,7 @@ interface InventoryTemplateProps {
 export const InventoryTemplate = ({
   isUseModalOpen,
   setIsUseModalOpen,
-  productIndex: _productIndex,
+  productIndex: productIndex,
   selectedProduct,
   currentMessage,
   handleSpeechBubbleClick,
@@ -35,6 +36,12 @@ export const InventoryTemplate = ({
   handleBack,
   handleUseProduct,
 }: InventoryTemplateProps) => {
+  
+  // 디버깅 로그
+  useEffect(() => {
+    console.log('productIndex:', productIndex, 'storeItems length:', storeItems.length);
+  }, [productIndex, storeItems.length]);
+
   return (
     <Background backgroundImage={IMAGE_URLS.market.inventory_bg}>
       {/* 뒤로가기 */}
@@ -67,34 +74,42 @@ export const InventoryTemplate = ({
       <div className="absolute top-39 left-43 w-75 flex flex-col gap-y-5">
         {Array(3)
           .fill(0)
-          .map((_, row) => (
-            <div key={row} className="flex items-center gap-x-13">
-              {storeItems.slice(_productIndex * 9 + row * 3, _productIndex * 9 + (row + 1) * 3).map((product) => (
-                <div
-                  className="relative w-[3.8rem] active:scale-95 transition-all duration-100 flex flex-col items-center gap-y-1"
-                  key={product.name}
-                  onClick={() => {
-                    handleProductClick(product)
-                  }}
-                >
-                  <img src={product.imageUrl} alt={product.name} className="w-10 h-10 object-contain" />
-                  <div className="bg-[#5C3600] py-0.5 px-1 text-[0.5rem] text-[#FFEDDA] text-center rounded-md whitespace-nowrap max-w-[3.8rem] truncate">
-                    {product.name}
+          .map((_, row) => {
+            const startIndex = productIndex * 9 + row * 3;
+            const endIndex = productIndex * 9 + (row + 1) * 3;
+            const rowItems = storeItems.slice(startIndex, endIndex);
+            console.log('startIndex:', startIndex, 'endIndex:', endIndex)
+            console.log('rowItems:', rowItems)
+            console.log('row:', rowItems.map((product) => product.name))
+            return (
+              <div key={row + productIndex} className="flex items-center gap-x-13">
+                {rowItems.map((product,index) => (
+                  <div
+                    className="relative w-[3.8rem] active:scale-95 transition-all duration-100 flex flex-col items-center gap-y-1"
+                    key={`${product.name}, ${index}`}
+                    onClick={() => {
+                      handleProductClick(product)
+                    }}
+                  >
+                    <img src={product.imageUrl} alt={product.name} className="w-10 h-10 object-contain" />
+                    <div className="bg-[#5C3600] py-0.5 px-1 text-[0.5rem] text-[#FFEDDA] text-center rounded-md whitespace-nowrap max-w-[3.8rem] truncate">
+                      {product.name}
+                    </div>
+                    {/* 재고 표시 */}
+                    {product.exp > 0 && (
+                    <div className="absolute top-6 left-10">
+                      <TextWithStroke
+                        text={product.stock.toString()}
+                        textClassName="text-[#060502] font-bold text-[0.6rem]"
+                        strokeClassName="text-[#FFF9D7] font-bold text-[0.6rem] text-stroke-width-[0.12rem] text-stroke-color-[#FFF9D7]"
+                      />
+                    </div>
+                    )}
                   </div>
-                  {/* 재고 표시 */}
-                  {product.exp > 0 && (
-                  <div className="absolute top-6 left-10">
-                    <TextWithStroke
-                      text={product.stock.toString()}
-                      textClassName="text-[#060502] font-bold text-[0.6rem]"
-                      strokeClassName="text-[#FFF9D7] font-bold text-[0.6rem] text-stroke-width-[0.12rem] text-stroke-color-[#FFF9D7]"
-                    />
-                  </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            );
+          })}
       </div>
     </Background>
   );
