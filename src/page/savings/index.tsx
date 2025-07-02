@@ -249,6 +249,7 @@ export default function SavingsPage() {
         success: Number(currentAmount) + Number(depositInput) >= Number(goalAmount),
       });
       // 서버 응답값으로 상태 갱신
+      postPushMessage(`${userName}님이 저축 통장에 ${depositInput}냥을 입금했어요!`);
       setCurrentAmount(String(data.accountPoint));
       // 총 포인트에서 입금액 차감
       if (point !== null) {
