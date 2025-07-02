@@ -13,7 +13,7 @@ export const NewsBox = memo(({ title,
   newsImage = IMAGE_URLS.investing_game.base.news_popo }: NewsBoxProps) => {
   return (
     <div className="relative flex flex-col items-start justify-center gap-y-0.5 w-[29rem] h-[5.5rem] px-7.5 py-1 mb-2 bg-main-yellow-200 rounded-2xl">
-      <h2 className="text-main-brown-850 text-lg font-bold">{title}</h2>
+      <h2 className="text-main-brown-850 text-lg font-bold overflow-y-auto scrollbar-hidden">{title}</h2>
       {/* <span className="text-main-brown-850 text-[0.8rem] font-bold">{hint}</span> */}
       <img
         src={newsImage}
