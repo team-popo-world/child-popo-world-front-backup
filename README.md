@@ -1,54 +1,41 @@
-# React + TypeScript + Vite
+# 어린이 금융 교육 플랫폼 (Child-PoPoWorld)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📱 프로젝트 소개
+어린이들이 게임을 통해 재미있게 금융을 배울 수 있는 교육 플랫폼입니다. 캐릭터 육성, 투자 게임, 퀘스트 시스템 등 게임적 요소를 통해 금융 교육을 제공합니다.
 
-Currently, two official plugins are available:
+## 🛠 기술 스택
+- **Framework**: React + TypeScript
+- **상태 관리**: Zustand
+- **API 통신**: TanStack Query
+- **스타일링**: CSS-in-JS
+- **이미지 최적화**: Cloudinary
+- **알림**: PWA + Service Worker
+- **차트**: Recharts
+- **빌드 도구**: Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎮 주요 기능
 
-## Expanding the ESLint configuration
+### 1. 캐릭터 육성 시스템
+- 레벨업 시스템
+- 캐릭터 진화
+- 경험치 획득
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. 투자 교육 게임
+- 모의 투자 시뮬레이션
+- 실시간 시장 변동
+- 포트폴리오 관리
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 3. 퀘스트 시스템
+- 일일/주간 퀘스트
+- 금융 미션
+- 보상 시스템
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 4. 감정 일기
+- 감정과 금융 연계 학습
+- 일기 작성 및 관리
+- 감정 트래킹
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### 5. 저축 시스템
+- 저축 목표 설정
+- 진행률 시각화
+- 이자 계산 학습
